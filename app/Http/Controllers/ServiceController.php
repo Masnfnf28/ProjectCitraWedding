@@ -14,13 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        // $makeup = Makeup::paginate(5);
-        // dd($makeup);
-        $photo  = Photo::paginate(5);
-        return view('page.service.index')->with([
-            // 'makeup' => $makeup,
-            'photo' => $photo
-        ]);
+        //
     }
 
     /**

@@ -38,16 +38,21 @@
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('client.index')">
                                     {{ __('Client') }}
-                                </x-dropdown-link>
-                                
-                                <x-dropdown-link :href="route('service.index')">
+                                </x-dropdown-link>           
+                                <x-dropdown-link :href="route('dashboard')">
                                     {{ __('Service') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('photo.index')">
+                                <x-dropdown-link :href="route('album.index')">
                                     {{ __('Album') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('makeup.index')">
                                     {{ __('MUA') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('events.index')">
+                                    {{ __('Events') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('catering.index')">
+                                    {{ __('Catering') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

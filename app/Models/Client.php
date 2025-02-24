@@ -14,7 +14,12 @@ class Client extends Model
         'namapr',
         'alamat',
         'notelp',
+        'email',
     ];
 
     protected $table = 'client';
+
+    public function events(){
+        return $this->hasMany(Events::class,'id_client');
+    }
 }

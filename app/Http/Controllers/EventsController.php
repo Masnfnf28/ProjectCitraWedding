@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
-use GuzzleHttp\Promise\Create;
+use App\Models\Client;
+use App\Models\Events;
 use Illuminate\Http\Request;
 
-class PhotoController extends Controller
+class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $photo = Photo::paginate(5);
-        return view('page.photo.index')->with([
-            'photo' => $photo
+        $events = Events::with('client')->paginate(5);
+        $client = Client::all();
+        return view('page.events.index',compact('client'))->with([
+            'events' => $events,
+            'client' => $client
         ]);
     }
 
@@ -24,7 +26,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        return view('page.photo.create');
+        //
     }
 
     /**
@@ -33,15 +35,14 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'photography' => $request->input('photography'),
-            'album' => $request->input('album'),
-            'desc' => $request->input('desc'),
-            'harga' => $request->input('harga'),
+            'id_client' => $request->input('id_client'),
+            'tgl_acara' => $request->input('tgl_acara'),
+            'lokasi' => $request->input('lokasi'),
         ];
-        Photo::create($data);
 
-        // return back()->with('message_delete','Data Customer Sudah di Hapus');
-        return redirect()->route('photo.index')->with('message_input', 'Success');
+        Events::create($data);
+
+        return back()->with('message_delete', 'Data Paket Sudah dihapus');
     }
 
     /**
@@ -57,7 +58,7 @@ class PhotoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -66,15 +67,15 @@ class PhotoController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'photography' => $request->input('photography'),
-            'album' => $request->input('album'),
-            'desc' => $request->input('desc'),
-            'harga' => $request->input('harga'),
+            'id_client_edit' => $request->input('id_client_edit'),
+            'tgl_acara' => $request->input('tgl_acara'),
+            'lokasi' => $request->input('lokasi'),
         ];
 
-        $datas = Photo::findOrFail($id);
+        $datas = Events::findOrFail($id);
         $datas->update($data);
-        return back()->with('message_delete','Data Member Sudah dihapus');
+        return back()->with('message_delete', 'Data Events Sudah dihapus');
+
     }
 
     /**
@@ -83,8 +84,8 @@ class PhotoController extends Controller
     public function destroy(string $id)
     {
         try{
-            $data = Photo::findOrFail($id);
-            $data = Photo::where('id',$id)->first();
+            $data = Events::findOrFail($id);
+            $data = Events::where('id',$id)->first();
 
             $data->delete();
 

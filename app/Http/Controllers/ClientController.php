@@ -38,11 +38,13 @@ class ClientController extends Controller
             'namapr' => $request->input('namapr'),
             'alamat' => $request->input('alamat'),
             'notelp' => $request->input('notelp'),
+            'email' => $request->input('email'),
         ];
         $dataUser =[
             'name' => $request->input('namapl'),
             'email' => $request->input('email'),
             'password' => Hash::make('12345678'),
+            'role' => 'CLIENT'
         ];
 
         Client::create($data);
@@ -91,6 +93,10 @@ class ClientController extends Controller
     public function destroy(string $id)
     {
         $data = Client::findOrFail($id);
+        $email = $data->email;
+
+        User::where('email', $email)->delete();
+        
         $data->delete();
         return back()->with('message_delete','Data Customer Sudah dihapus');
     }
