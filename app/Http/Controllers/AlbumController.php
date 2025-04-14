@@ -12,10 +12,12 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $album = Album::paginate(5);
-        return view('page.album.index')->with([
-            'album' => $album
-        ]);
+        try {
+            $albums = Album::paginate(3); // Harus menggunakan paginate, bukan all()
+            return view('page.album.index', compact('albums'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -31,14 +33,25 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'jenis_album' => $request->input('jenis_album'),
-            'deskripsi' => $request->input('deskripsi'),
-            'harga' => $request->input('harga'),
-        ];
-        Album::create($data);
-        
-        return back()->with('message_delete','Data Customer Sudah di Hapus');
+
+        try {
+            $data = [
+                'jenis_album' => $request->input('jenis_album'),
+                'deskripsi' => $request->input('deskripsi'),
+                'harga' => $request->input('harga'),
+            ];
+            Album::create($data);
+
+            // return back()->with('message_delete', 'Data Customer Sudah di Hapus');
+
+            return redirect()
+                ->route('album.index')
+                ->with('message_insert', 'Data Album Sudah ditambahkan');
+        } catch (\Exception $e) {
+            echo "<script>console.error('PHP Error: " .
+                addslashes($e->getMessage()) . "');</script>";
+            return view('error.index');
+        }
     }
 
     /**
@@ -62,16 +75,26 @@ class AlbumController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = [
-            'jenis_album' => $request->input('jenis_album'),
-            'deskripsi' => $request->input('deskripsi'),
-            'harga' => $request->input('harga'),
-        ];
+        try {
+            $data = [
+                'jenis_album' => $request->input('jenis_album'),
+                'deskripsi' => $request->input('deskripsi'),
+                'harga' => $request->input('harga'),
+            ];
 
 
-        $datas = Album::findOrFail($id);
-        $datas->update($data);
-        return back()->with('message_delete','Data Album Sudah dihapus');
+            $datas = Album::findOrFail($id);
+            $datas->update($data);
+            // return back()->with('message_delete', 'Data Album Sudah dihapus');
+
+            return redirect()
+                ->route('album.index')
+                ->with('message_insert', 'Data Album Sudah ditambahkan');
+        } catch (\Exception $e) {
+            echo "<script>console.error('PHP Error: " .
+                addslashes($e->getMessage()) . "');</script>";
+            return view('error.index');
+        }
     }
 
     /**
@@ -79,8 +102,14 @@ class AlbumController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Album::findOrFail($id);
-        $data->delete();
-        return back()->with('message_delete','Data Customer Sudah dihapus');
+        try {
+            $data = Album::findOrFail($id);
+            $data->delete();
+            return back()->with('message_delete', 'Data Customer Sudah dihapus');
+        } catch (\Exception $e) {
+            echo "<script>console.error('PHP Error: " .
+                addslashes($e->getMessage()) . "');</script>";
+            return view('error.index');
+        }
     }
 }

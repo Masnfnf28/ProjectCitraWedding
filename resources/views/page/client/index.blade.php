@@ -94,36 +94,36 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($client as $c)
+                                    @foreach ($clients as $index => $client)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
                                                 class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $no++ }}
+                                                {{ ($clients->currentPage() - 1) * $clients->perPage() + $loop->iteration }}
                                             </th>
                                             <td class="px-5 py-3">
-                                                {{ $c->namapl }}
+                                                {{ $client->namapl }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $c->namapr }}
+                                                {{ $client->namapr }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $c->alamat }}
+                                                {{ $client->alamat }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $c->notelp }}
+                                                {{ $client->notelp }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
                                                     onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $c->id }}" data-namapl="{{ $c->namapl }}"data-namapr="{{ $c->namapr }}"
-                                                    data-alamat="{{ $c->alamat }}" data-notelp="{{ $c->notelp }}">
+                                                    data-id="{{ $client->id }}" data-namapl="{{ $client->namapl }}"data-namapr="{{ $client->namapr }}"
+                                                    data-alamat="{{ $client->alamat }}" data-notelp="{{ $client->notelp }}">
                                                     <i class="fi fi-sr-file-edit"></i>
                                                 </button>
                                                 <button
                                                     class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return clientDelete('{{ $c->id }}','{{ $c->namapl }}','{{$c->namapr}}')">
+                                                    onclick="return clientDelete('{{ $client->id }}','{{ $client->namapl }}','{{$client->namapr}}')">
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
@@ -133,7 +133,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $client->links() }}
+                            {{ $clients->links() }}
                         </div>
                     </div>
                 </div>

@@ -184,6 +184,7 @@
             const modalTarget = button.dataset.modalTarget;
             const id = button.dataset.id;
             const id_client = button.dataset.id_client;
+            const client = button.dataset.client;
             const tgl_acara = button.dataset.tgl_acara;
             const lokasi = button.dataset.lokasi;
             let url = "{{ route('events.update', ':id') }}".replace(':id', id);

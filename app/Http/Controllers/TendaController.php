@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catering;
+use App\Models\Tenda;
 use Illuminate\Http\Request;
 
-class CateringController extends Controller
+class TendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $catering = Catering::paginate(5);
-        // return view('page.catering.index')->with([
-        //     'catering' => $catering
-        // ]);
+        // $tenda = Tenda::paginate(5);
+        // return view('page.tenda.index')->with([
+        //     'tenda' => $tenda
+        // ]);  
         try{
-            $catering = Catering::paginate(5);
-            return view('page.catering.index')->with([
-                'catering' => $catering,
+            $tenda = Tenda::paginate(5);
+            return view('page.tenda.index')->with([
+                'tenda' => $tenda,
             ]);
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
@@ -34,7 +34,7 @@ class CateringController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -42,25 +42,23 @@ class CateringController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         try{
         $data = [
-            'type_catering' => $request->input('type_catering'),
-            'deskripsi' => $request->input('deskripsi'),
-            'porsi' => $request->input('porsi'),
-            'harga' => $request->input('harga'),
+            'uk_tenda' => $request->input('uk_tenda'),
+            'harga_tenda' => $request->input('harga_tenda'),
         ];
-        Catering::create($data);
+        Tenda::create($data);
         
         // return back()->with('message_delete','Data Catering Sudah di Hapus');
         return redirect()
-                ->route('catering.index')
+                ->route('tenda.index')
                 ->with('message_insert', 'Data Album Sudah ditambahkan');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
             return view('error.index');
         }
+
     }
 
     /**
@@ -84,28 +82,26 @@ class CateringController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
+        try{
         $data = [
-            'type_catering' => $request->input('type_catering'),
-            'deskripsi' => $request->input('deskripsi'),
-            'porsi' => $request->input('porsi'),
-            'harga' => $request->input('harga'),
+            'uk_tenda' => $request->input('uk_tenda'),
+            'harga_tenda' => $request->input('harga_tenda'),
         ];
 
 
-        $datas = Catering::findOrFail($id);
+        $datas = Tenda::findOrFail($id);
         $datas->update($data);
         // return back()->with('message_update','Data Catering Sudah di Update');
 
         return redirect()
-                ->route('catering.index')
+                ->route('tenda.index')
                 ->with('message_insert', 'Data Album Sudah ditambahkan');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
             return view('error.index');
         }
-    
+
     }
 
     /**
@@ -114,16 +110,18 @@ class CateringController extends Controller
     public function destroy(string $id)
     {
         try{
-        $data = Catering::findOrFail($id);
+        $data = Tenda::findOrFail($id);
         $data->delete();
         return back()->with('message_delete','Data Customer Sudah dihapus');
+
         return redirect()
-                ->route('catering.index')
+                ->route('tenda.index')
                 ->with('message_insert', 'Data Album Sudah ditambahkan');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
             return view('error.index');
         }
+
     }
 }

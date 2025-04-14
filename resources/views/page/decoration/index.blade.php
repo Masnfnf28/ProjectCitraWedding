@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Catering') }}
+            {{ __('Dekorasi') }}
         </h2>
     </x-slot>
 
@@ -10,34 +10,28 @@
             <div class="gap-5 items-start flex">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/2 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        FORM INPUT CATERING
+                        FORM INPUT DEKORASI
                     </div>
                     <div>
-                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('catering.store') }}">
+                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('dekorasi.store') }}">
                             @csrf
                             <div class="mb-5">
-                                <label for="type_catering"
+                                <label for="type_dekorasi"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Catering
                                 </label>
-                                <input type="text" name="type_catering"
+                                <input type="text" name="type_dekorasi"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-5">
-                                <label for="deskripsi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
-                                <textarea type="text" name="deskripsi"
+                                <label for="gambar_dekorasi"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Dekorasi</label>
+                                <textarea type="file" name="gamber_dekorasi"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                             </div>
                             <div class="mb-5">
-                                <label for="porsi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porsi Catering</label>
-                                <input type="number" name="porsi"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                            </div>
-                            <div class="mb-5">
-                                <label for="harga"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                                <input type="int" name="harga"
+                                <label for="harga_dekorasi"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Dekorasi</label>
+                                <input type="int" name="harga_dekorasi"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                             </div>
                             <button type="submit"

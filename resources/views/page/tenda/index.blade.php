@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Catering') }}
+            {{ __('Tenda') }}
         </h2>
     </x-slot>
 
@@ -10,34 +10,22 @@
             <div class="gap-5 items-start flex">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/2 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        FORM INPUT CATERING
+                        FORM INPUT TENDA
                     </div>
                     <div>
-                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('catering.store') }}">
+                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('tenda.store') }}">
                             @csrf
                             <div class="mb-5">
-                                <label for="type_catering"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Catering
+                                <label for="uk_tenda"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ukuran Tenda
                                 </label>
-                                <input type="text" name="type_catering"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                <input type="text" name="uk_tenda"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
                             <div class="mb-5">
-                                <label for="deskripsi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
-                                <textarea type="text" name="deskripsi"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
-                            </div>
-                            <div class="mb-5">
-                                <label for="porsi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porsi Catering</label>
-                                <input type="number" name="porsi"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                            </div>
-                            <div class="mb-5">
-                                <label for="harga"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                                <input type="int" name="harga"
+                                <label for="harga_tenda"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Tenda</label>
+                                <input type="number" name="harga_tenda"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                             </div>
                             <button type="submit"
@@ -48,7 +36,7 @@
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        DATA CATERING
+                        DATA TENDA
                     </div>
                     <div>
                         <div class="relative overflow-x-auto">
@@ -60,16 +48,10 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            TYPE CATERING
+                                            UKURAN TENDA
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            DESKRIPSI
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            PORSI CATERING
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            HARGA
+                                            HARGA TENDA
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             ACTION
@@ -80,7 +62,7 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($catering as $c)
+                                    @foreach ($tenda as $t)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
@@ -88,31 +70,23 @@
                                                 {{ $no++ }}
                                             </th>
                                             <td class="px-5 py-3">
-                                                {{ $c->type_catering }}
+                                                {{ $t->uk_tenda }}
                                             </td>
                                             <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->deskripsi }}
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->porsi }} Orang
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                Rp{{ $c->harga }}
+                                                Rp {{ $t->harga_tenda}}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
                                                     onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $c->id }}"
-                                                    data-type_catering="{{ $c->type_catering }}"
-                                                    data-deskripsi="{{ $c->deskripsi }}"
-                                                    data-porsi="{{ $c->porsi }}"
-                                                    data-harga="{{ $c->harga }}">
+                                                    data-id="{{ $t->id }}"
+                                                    data-uk_tenda="{{ $t->uk_tenda }}"
+                                                    data-harga_tenda="{{ $t->harga_tenda }}">
                                                     <i class="fi fi-sr-file-edit"></i>
                                                 </button>
                                                 <button
                                                     class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return cateringDelete('{{ $c->id }}','{{ $c->type_catering }}')">
+                                                    onclick="return tendaDelete('{{ $t->id }}','{{ $t->uk_tenda }}')">
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
@@ -122,7 +96,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $catering->links() }}
+                            {{ $tenda->links() }}
                         </div>
                     </div>
                 </div>
@@ -149,25 +123,14 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type Catering</label>
-                            <input type="text" id="type_catering" name="type_catering"
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Ukuran Tenda</label>
+                            <input type="text" id="uk_tenda" name="uk_tenda"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan Type Catering">
+                                placeholder="Masukan Ukuran Tenda">
                         </div>
                         <div class="">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
-                            <textarea type="text" name="deskripsi" id="deskripsi"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
-                        </div>
-                        <div class="">
-                            <label for="number" class="block mb-2 text-sm font-medium text-gray-900">Porsi Catering</label>
-                            <input type="number" id="porsi" name="porsi"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
-                        <div class="">
-                            <label for="int" class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
-                            <input type="int" id="harga" name="harga"
+                            <label for="int" class="block mb-2 text-sm font-medium text-gray-900">Harga Tenda</label>
+                            <input type="int" id="harga_tenda" name="harga_tenda"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                     </div>
@@ -187,19 +150,15 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const type_catering = button.dataset.type_catering;
-        const deskripsi = button.dataset.deskripsi;
-        const porsi = button.dataset.porsi;
-        const harga = button.dataset.harga;
-        let url = "{{ route('catering.update', ':id') }}".replace(':id', id);
+        const uk_tenda = button.dataset.uk_tenda;
+        const harga_tenda = button.dataset.harga_tenda;
+        let url = "{{ route('tenda.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `UPDATE CATERING ${type_catering}`;
+        document.getElementById('title_source').innerText = `UPDATE TENDA ${uk_tenda}`;
 
-        document.getElementById('type_catering').value = type_catering;
-        document.getElementById('deskripsi').value = deskripsi;
-        document.getElementById('porsi').value = porsi;
-        document.getElementById('harga').value = harga;
+        document.getElementById('uk_tenda').value = uk_tenda;
+        document.getElementById('harga_tenda').value = harga_tenda;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);
@@ -223,10 +182,10 @@
         status.classList.toggle('hidden');
     }
 
-    const cateringDelete = async (id, type_catering) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus Catering ${type_catering} ?`);
+    const tendaDelete = async (id, uk_tenda) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus Catering ${uk_tenda} ?`);
         if (tanya) {
-            await axios.post(`/catering/${id}`, {
+            await axios.post(`/tenda/${id}`, {
                     '_method': 'DELETE',
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 })

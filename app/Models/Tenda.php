@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Decoration extends Model
+class Tenda extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type_dekorasi',
-        'gambar_dekorasi',
-        'harga_dekorasi',
+        'uk_tenda',
+        'harga_tenda',
     ];
 
-    protected $table = 'decoration';
+    protected $table = 'tenda';
 }

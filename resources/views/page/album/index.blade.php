@@ -82,35 +82,35 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($album as $a)
+                                    @foreach ($albums as $index => $album)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
                                                 class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
-                                                {{ $no++ }}
+                                                {{ ($albums->currentPage() - 1) * $albums->perPage() + $loop->iteration  }}
                                             </th>
                                             <td class="px-5 py-3">
-                                                {{ $a->jenis_album }}
+                                                {{ $album->jenis_album }}
                                             </td>
                                             <td class="px-5 py-3 bg-gray-100">
-                                                {{ $a->deskripsi }}
+                                                {{ $album->deskripsi }}
                                             </td>
                                             <td class="px-5 py-3 bg-gray-100">
-                                                Rp{{ $a->harga }}
+                                                Rp{{ $album->harga }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
                                                     onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $a->id }}"
-                                                    data-jenis_album="{{ $a->jenis_album }}"
-                                                    data-deskripsi="{{ $a->deskripsi }}"
-                                                    data-harga="{{ $a->harga }}">
+                                                    data-id="{{ $album->id }}"
+                                                    data-jenis_album="{{ $album->jenis_album }}"
+                                                    data-deskripsi="{{ $album->deskripsi }}"
+                                                    data-harga="{{ $album->harga }}">
                                                     <i class="fi fi-sr-file-edit"></i>
                                                 </button>
                                                 <button
                                                     class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return albumDelete('{{ $a->id }}','{{ $a->jenis_album }}')">
+                                                    onclick="return albumDelete('{{ $album->id }}','{{ $album->jenis_album }}')">
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
@@ -120,7 +120,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $album->links() }}
+                            {{ $albums->links() }}
                         </div>
                     </div>
                 </div>

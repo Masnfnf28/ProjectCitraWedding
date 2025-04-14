@@ -14,10 +14,12 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $client = Client::paginate(5);
-        return view('page.client.index')->with([
-            'client' => $client
-        ]);
+        try {
+            $clients = Client::paginate(3);
+            return view('page.client.index', compact('clients'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -40,7 +42,7 @@ class ClientController extends Controller
             'notelp' => $request->input('notelp'),
             'email' => $request->input('email'),
         ];
-        $dataUser =[
+        $dataUser = [
             'name' => $request->input('namapl'),
             'email' => $request->input('email'),
             'password' => Hash::make('12345678'),
@@ -49,8 +51,8 @@ class ClientController extends Controller
 
         Client::create($data);
         User::create($dataUser);
-        
-        return back()->with('message_delete','Data Customer Sudah di Hapus');
+
+        return back()->with('message_delete', 'Data Customer Sudah di Hapus');
     }
 
     /**
@@ -84,7 +86,7 @@ class ClientController extends Controller
 
         $datas = Client::findOrFail($id);
         $datas->update($data);
-        return back()->with('message_delete','Data Customer Sudah dihapus');
+        return back()->with('message_delete', 'Data Customer Sudah dihapus');
     }
 
     /**
@@ -96,8 +98,8 @@ class ClientController extends Controller
         $email = $data->email;
 
         User::where('email', $email)->delete();
-        
+
         $data->delete();
-        return back()->with('message_delete','Data Customer Sudah dihapus');
+        return back()->with('message_delete', 'Data Customer Sudah dihapus');
     }
 }

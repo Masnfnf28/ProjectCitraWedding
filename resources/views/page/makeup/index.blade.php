@@ -39,14 +39,14 @@
                         </form>
                     </div> --}}
                 </div>
-
+                
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold flex justify-between items-center">
-                        MAKEUP 
+                        MAKEUP
                         <button type="button"
-                        class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between"
-                        onclick="addSourceModal(this)" data-modal-target-add="sourceModalAdd">
-                        <i class="fi fi-sr-square-plus"></i>
+                            class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between"
+                            onclick="addSourceModal(this)" data-modal-target-add="sourceModalAdd">
+                            <i class="fi fi-sr-square-plus"></i>
                         </button>
                     </div>
                     <div>
@@ -76,45 +76,49 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                      @foreach ($makeup as $m)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4" align="center">
-                                    <th scope="row"
-                                        class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
-                                        {{ $no++ }}
-                                    </th>
-                                    <td class="px-5 py-3">
-                                        {{ $m->type_makeup }}
-                                    </td>
-                                    <td class="px-5 py-3 bg-gray-100">
-                                        {{ $m->description }}
-                                    </td>
-                                    <td class="px-5 py-3 bg-gray-100">
-                                        Rp{{ $m->harga }}
-                                    </td>
-                                    <td class="px-5 py-3">
-                                        <button type="button"
-                                            class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
-                                            onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                            data-id="{{ $m->id }}" data-type_makeup="{{ $m->type_makeup }}"
-                                            data-description="{{ $m->description }}" data-harga="{{ $m->harga }}">
-                                            <i class="fi fi-sr-file-edit"></i>
-                                        </button>
-                                        <button class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                            onclick="return makeupDelete('{{ $m->id }}','{{ $m->type_makeup }}')">
-                                            <i class="fi fi-sr-delete-document"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                    @foreach ($makeup as $m)
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
+                                            align="center">
+                                            <th scope="row"
+                                                class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
+                                                {{ $no++ }}
+                                            </th>
+                                            <td class="px-5 py-3">
+                                                {{ $m->type_makeup }}
+                                            </td>
+                                            <td class="px-5 py-3 bg-gray-100">
+                                                {{ $m->description }}
+                                            </td>
+                                            <td class="px-5 py-3 bg-gray-100">
+                                                Rp{{ $m->harga }}
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <button type="button"
+                                                    class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
+                                                    onclick="editSourceModal(this)" data-modal-target="sourceModal"
+                                                    data-id="{{ $m->id }}"
+                                                    data-type_makeup="{{ $m->type_makeup }}"
+                                                    data-description="{{ $m->description }}"
+                                                    data-harga="{{ $m->harga }}">
+                                                    <i class="fi fi-sr-file-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
+                                                    onclick="return makeupDelete('{{ $m->id }}','{{ $m->type_makeup }}')">
+                                                    <i class="fi fi-sr-delete-document"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
-                                </table>
-                            </div>
-                            <div class="mt-4">
-                                {{ $makeup->links() }}
-                            </div>
+                            </table>
+                        </div>
+                        <div class="mt-4">
+                            {{ $makeup->links() }}
+                        </div>
                     </div>
                 </div>
-                
+
 
             </div>
         </div>
@@ -147,12 +151,11 @@
                         <div class="">
                             <label for="text"
                                 class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                                <textarea type="text" name="description" id="description"
+                            <textarea type="text" name="description" id="description"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
                         </div>
                         <div class="">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
                             <input type="text" id="harga" name="harga"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
@@ -171,16 +174,18 @@
     <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModalAdd">
         <div class="fixed inset-0 bg-black opacity-50"></div>
         <div class="fixed inset-0 flex items-center justify-center">
-            <div class="w-full md:w-1/2 relative bg-white rounded-lg shadow mx-5">
-                <div class="flex items-start justify-between p-4 border-b rounded-t">
-                    <h3 class="text-xl font-semibold text-gray-900" id="title_source_add">
+            {{-- ADD --}}
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/2 p-4">
+                <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold" id="title_source_add">
+                    {{-- <h3 class="text-xl font-semibold text-gray-900" id="title_source_add">
                         Update Sumber Database
-                    </h3>
+                    </h3> --}}
                     {{-- <button type="button" onclick="sourceModalClose(this)" data-modal-target="sourceModal"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                         data-modal-hide="defaultModal">
                         <i class="fa-solid fa-xmark"></i>
                     </button> --}}
+                    Form Input
                 </div>
                 <div>
                     <form class="max-w-sm mx-auto" method="POST" action="{{ route('makeup.store') }}">
@@ -202,7 +207,8 @@
                             <label for="harga"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
                             <input type="text" name="harga"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ">
+                            </textarea>
                         </div>
                         {{-- <div class="mb-5">
                             <label for="jenis_kelamin"
@@ -216,6 +222,8 @@
                         </div> --}}
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        <button type="button" data-modal-target="sourceModalAdd" onclick="sourceModalClose(this)"
+                            class="bg-red-500 m-2 w-40 h-10 rounded-xl text-white hover:shadow-lg hover:bg-red-600">Batal</button>
                     </form>
                 </div>
             </div>
@@ -260,7 +268,7 @@
         const modalTargetAdd = button.dataset.modalTargetAdd;
 
         let status = document.getElementById(modalTargetAdd);
-        document.getElementById('title_source_add').innerText = `ADD`;
+        document.getElementById('title_source_add').innerText = `ADD TYPE MAKEUP`;
 
         status.classList.toggle('hidden');
     }
