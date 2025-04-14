@@ -31,14 +31,14 @@
                             <div class="mb-5">
                                 <label for="porsi"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porsi Catering</label>
-                                <input type="number" name="porsi"
+                                <input type="number" name="porsi" id="create_porsi"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                             </div>
                             <div class="mb-5">
                                 <label for="harga"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                                <input type="int" name="harga"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                <input type="int" name="harga" id="create_harga"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly/>
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -80,50 +80,46 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($catering as $c)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
-                                            align="center">
-                                            <th scope="row"
-                                                class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
-                                                {{ $no++ }}
-                                            </th>
-                                            <td class="px-5 py-3">
-                                                {{ $c->type_catering }}
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->deskripsi }}
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->porsi }} Orang
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                Rp{{ $c->harga }}
-                                            </td>
-                                            <td class="px-5 py-3">
-                                                <button type="button"
-                                                    class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
-                                                    onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $c->id }}"
-                                                    data-type_catering="{{ $c->type_catering }}"
-                                                    data-deskripsi="{{ $c->deskripsi }}"
-                                                    data-porsi="{{ $c->porsi }}"
-                                                    data-harga="{{ $c->harga }}">
-                                                    <i class="fi fi-sr-file-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return cateringDelete('{{ $c->id }}','{{ $c->type_catering }}')">
-                                                    <i class="fi fi-sr-delete-document"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                     @foreach ($catering as $c)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4" align="center">
+                                    <th scope="row"
+                                        class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
+                                        {{ $no++ }}
+                                    </th>
+                                    <td class="px-5 py-3">
+                                        {{ $c->type_catering }}
+                                    </td>
+                                    <td class="px-5 py-3 bg-gray-100">
+                                        {{ $c->deskripsi }}
+                                    </td>
+                                    <td class="px-5 py-3 bg-gray-100">
+                                        {{ $c->porsi }} Orang
+                                    </td>
+                                    <td class="px-5 py-3 bg-gray-100">
+                                        Rp{{ $c->harga }}
+                                    </td>
+                                    <td class="px-5 py-3">
+                                        <button type="button"
+                                            class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
+                                            onclick="editSourceModal(this)" data-modal-target="sourceModal"
+                                            data-id="{{ $c->id }}" data-type_catering="{{ $c->type_catering }}"
+                                            data-deskripsi="{{ $c->deskripsi }}" data-porsi="{{ $c->porsi }}"
+                                            data-harga="{{ $c->harga }}">
+                                            <i class="fi fi-sr-file-edit"></i>
+                                        </button>
+                                        <button class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
+                                            onclick="return cateringDelete('{{ $c->id }}','{{ $c->type_catering }}')">
+                                            <i class="fi fi-sr-delete-document"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
                                 </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4">
-                            {{ $catering->links() }}
-                        </div>
+                                </table>
+                            </div>
+                            <div class="mt-4">
+                                {{ $catering->links() }}
+                            </div>
                     </div>
                 </div>
 
@@ -149,7 +145,8 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type Catering</label>
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type
+                                Catering</label>
                             <input type="text" id="type_catering" name="type_catering"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Masukan Type Catering">
@@ -158,17 +155,19 @@
                             <label for="text"
                                 class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
                             <textarea type="text" name="deskripsi" id="deskripsi"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> </textarea>
                         </div>
                         <div class="">
-                            <label for="number" class="block mb-2 text-sm font-medium text-gray-900">Porsi Catering</label>
+                            <label for="number" class="block mb-2 text-sm font-medium text-gray-900">Porsi
+                                Catering</label>
                             <input type="number" id="porsi" name="porsi"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                         <div class="">
                             <label for="int" class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
                             <input type="int" id="harga" name="harga"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                readonly>
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -241,4 +240,21 @@
                 });
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const porsiInput = document.getElementById('create_porsi');
+        const hargaInput = document.getElementById('create_harga');
+
+        if (porsiInput && hargaInput) {
+            porsiInput.addEventListener('input', function() {
+                const porsi = parseInt(this.value) || 0;
+                hargaInput.value = porsi * 10000;
+            });
+        }
+    });
+
+    // Modal (update)
+    document.getElementById('formSourceModal').addEventListener('input', function() {
+        const porsi = parseInt(document.getElementById('porsi').value) || 0;
+        document.getElementById('harga').value = porsi * 10000;
+    });
 </script>

@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+    @can('role=OWNER')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Cards Section -->
@@ -97,6 +98,8 @@
             </div>
         </div>
     </div>
+    @endcan
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const incomeCtx = document.getElementById('incomeChart').getContext('2d');

@@ -47,6 +47,7 @@
                 <option value="">Pilih...</option>
                 <option value="ADMIN">ADMIN</option>
                 <option value="CLIENT">CLIENT</option>
+                <option value="OWNER">OWNER</option>
             </select>
         </div>
 

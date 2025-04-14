@@ -48,7 +48,7 @@ class CateringController extends Controller
             'type_catering' => $request->input('type_catering'),
             'deskripsi' => $request->input('deskripsi'),
             'porsi' => $request->input('porsi'),
-            'harga' => $request->input('harga'),
+            'harga' => $request->porsi * 10000,
         ];
         Catering::create($data);
         

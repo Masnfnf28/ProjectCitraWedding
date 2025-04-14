@@ -40,8 +40,9 @@ class ClientController extends Controller
             'namapr' => $request->input('namapr'),
             'alamat' => $request->input('alamat'),
             'notelp' => $request->input('notelp'),
-            'email' => $request->input('email'),
         ];
+        Client::create($data);
+
         $dataUser = [
             'name' => $request->input('namapl'),
             'email' => $request->input('email'),
@@ -49,7 +50,7 @@ class ClientController extends Controller
             'role' => 'CLIENT'
         ];
 
-        Client::create($data);
+
         User::create($dataUser);
 
         return back()->with('message_delete', 'Data Customer Sudah di Hapus');

@@ -63,7 +63,7 @@
                         </x-dropdown>
                     </li>
                 </div>
-                @can('CLIENT')
+                @can('role=OWNER')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
                     <x-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.index')">
                         {{ __('Laporan') }}
