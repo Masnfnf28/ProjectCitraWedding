@@ -22,4 +22,8 @@ class Client extends Model
     public function events(){
         return $this->hasMany(Events::class,'id_client');
     }
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class, 'id');
+    }
 }

@@ -35,10 +35,28 @@
                                         />
                                 </div>
                             </div>
-                            <div class="flex gap-3">
+                            {{-- <div class="flex gap-3">
+                                <div class="mb-5 w-full">
                                 <button type="submit" class=" bg-emerald-200 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-emerald-200 dark:hover:bg-emerald-300 dark:focus:ring-emerald-300">Print</button>
+                                </div>
+                                <div class="mb-5 w-full">
                                 <button type="reset" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-red-00 dark:hover:bg-red-500 dark:focus:ring-red-500">Batal</button>
+                                </div>
+                            </div> --}}
+                            <div class="flex justify-between mt-5">
+                                <!-- Tombol Print -->
+                                <button type="submit"
+                                    class=" bg-emerald-200 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-emerald-200 dark:hover:bg-emerald-300 dark:focus:ring-emerald-300">
+                                    Print
+                                </button>
+                            
+                                <!-- Tombol Batal -->
+                                <button type="reset"
+                                    class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-red-00 dark:hover:bg-red-500 dark:focus:ring-red-500">
+                                    Batal
+                                </button>
                             </div>
+                            
                         </form>
                     </div>
                 </div>

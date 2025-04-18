@@ -16,4 +16,8 @@ class Album extends Model
     ];
 
     protected $table = 'album';
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class, 'id');
+    }
 }

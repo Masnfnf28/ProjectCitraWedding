@@ -12,6 +12,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TendaController;
+use App\Http\Controllers\TransaksiController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,8 @@ Route::resource('album', AlbumController::class)->middleware('auth');
 Route::resource('catering', CateringController::class)->middleware('auth');
 Route::resource('tenda', TendaController::class)->middleware('auth');
 Route::resource('decoration', DecorationController::class)->middleware('auth');
+
+Route::resource('transaksi', TransaksiController::class)->middleware('auth');
 
 
 

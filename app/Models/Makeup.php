@@ -16,4 +16,8 @@ class Makeup extends Model
     ];
 
     protected $table = 'makeup';
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class, 'id');
+    }
 }

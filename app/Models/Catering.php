@@ -17,4 +17,8 @@ class Catering extends Model
     ];
 
     protected $table = 'catering';
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class, 'id');
+    }
 }
