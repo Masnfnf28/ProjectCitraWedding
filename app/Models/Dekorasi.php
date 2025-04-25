@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Decoration extends Model
+class Dekorasi extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'type_dekorasi',
-        'gambar_dekorasi',
-        'harga_dekorasi',
+        'deskripsi',
+        'harga',
     ];
 
-    protected $table = 'decoration';
+    protected $table = 'dekorasi';
+
+    public function paket(){
+        return $this->hasMany(Paket::class, 'id');
+    }
 }

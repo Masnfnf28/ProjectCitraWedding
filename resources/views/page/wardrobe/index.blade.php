@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dekorasi') }}
+            {{ __('Wardrobe') }}
         </h2>
     </x-slot>
 
@@ -10,30 +10,41 @@
             <div class="gap-5 items-start flex">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/2 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        FORM INPUT DEKORASI
+                        FORM INPUT WARDROBE
                     </div>
                     <div>
-                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('dekorasi.store') }}">
+                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('wardrobe.store') }}">
                             @csrf
                             <div class="mb-5">
-                                <label for="type_dekorasi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Catering
+                                <label for="type_wardrobe"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Wardrobe
                                 </label>
-                                <input type="text" name="type_dekorasi"
+                                <input type="text" name="type_wardrobe"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-5">
-                                <label for="gambar_dekorasi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Dekorasi</label>
-                                <textarea type="file" name="gamber_dekorasi"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                <label for="deskripsi"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
+                                <textarea type="text" name="deskripsi"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
                             </div>
                             <div class="mb-5">
-                                <label for="harga_dekorasi"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Dekorasi</label>
-                                <input type="int" name="harga_dekorasi"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                <label for="harga"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+                                <input type="text" name="harga"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ">
+                                </textarea>
                             </div>
+                            {{-- <div class="mb-5">
+                                <label for="jenis_kelamin"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="jenis_kelamin" data-placeholder="Pilih Jenis Kelamin" required>
+                                    <option value="">Pilih...</option>
+                                    <option value="Laki - Laki">Laki - Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div> --}}
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </form>
@@ -42,7 +53,7 @@
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        DATA CATERING
+                        DATA WARDROBE
                     </div>
                     <div>
                         <div class="relative overflow-x-auto">
@@ -54,13 +65,10 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            TYPE CATERING
+                                            TYPE WARDROBE
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             DESKRIPSI
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            PORSI CATERING
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             HARGA
@@ -72,51 +80,47 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach ($catering as $c)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
-                                            align="center">
-                                            <th scope="row"
-                                                class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
-                                                {{ $no++ }}
-                                            </th>
-                                            <td class="px-5 py-3">
-                                                {{ $c->type_catering }}
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->deskripsi }}
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                {{ $c->porsi }} Orang
-                                            </td>
-                                            <td class="px-5 py-3 bg-gray-100">
-                                                Rp{{ $c->harga }}
-                                            </td>
-                                            <td class="px-5 py-3">
-                                                <button type="button"
-                                                    class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
-                                                    onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $c->id }}"
-                                                    data-type_catering="{{ $c->type_catering }}"
-                                                    data-deskripsi="{{ $c->deskripsi }}"
-                                                    data-porsi="{{ $c->porsi }}"
-                                                    data-harga="{{ $c->harga }}">
-                                                    <i class="fi fi-sr-file-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return cateringDelete('{{ $c->id }}','{{ $c->type_catering }}')">
-                                                    <i class="fi fi-sr-delete-document"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+    $no = 1;
+@endphp
+@foreach ($wardrobe as $index => $item)
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4" align="center">
+        <th scope="row"
+            class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
+            {{ ($wardrobe->currentPage() - 1) * $wardrobe->perPage() + $loop->iteration }}
+        </th>
+        <td class="px-5 py-3">
+            {{ $item->type_wardrobe }}
+        </td>
+        <td class="px-5 py-3 bg-gray-100">
+            {{ $item->deskripsi }}
+        </td>
+        <td class="px-5 py-3 bg-gray-100">
+            Rp{{ $item->harga }}
+        </td>
+        <td class="px-5 py-3">
+            <button type="button"
+                class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
+                onclick="editSourceModal(this)" data-modal-target="sourceModal"
+                data-id="{{ $item->id }}"
+                data-type_wardrobe="{{ $item->type_wardrobe }}"
+                data-deskripsi="{{ $item->deskripsi }}"
+                data-harga="{{ $item->harga }}">
+                <i class="fi fi-sr-file-edit"></i>
+            </button>
+            <button
+                class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
+                onclick="return wardrobeDelete('{{ $item->id }}','{{ $item->type_wardrobe }}')">
+                <i class="fi fi-sr-delete-document"></i>
+            </button>
+        </td>
+    </tr>
+@endforeach
+
                                 </tbody>
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $catering->links() }}
+                            {{ $wardrobe->links() }}
                         </div>
                     </div>
                 </div>
@@ -143,10 +147,11 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type Catering</label>
-                            <input type="text" id="type_catering" name="type_catering"
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type
+                                Wardrobe</label>
+                            <input type="text" id="type_wardrobe" name="type_wardrobe"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan Type Catering">
+                                placeholder="Masukan Jenis">
                         </div>
                         <div class="">
                             <label for="text"
@@ -155,13 +160,8 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
                         </div>
                         <div class="">
-                            <label for="number" class="block mb-2 text-sm font-medium text-gray-900">Porsi Catering</label>
-                            <input type="number" id="porsi" name="porsi"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
-                        <div class="">
-                            <label for="int" class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
-                            <input type="int" id="harga" name="harga"
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Harga</label>
+                            <input type="text" id="harga" name="harga"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
                     </div>
@@ -181,18 +181,16 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const type_catering = button.dataset.type_catering;
+        const type_wardrobe = button.dataset.type_wardrobe;
         const deskripsi = button.dataset.deskripsi;
-        const porsi = button.dataset.porsi;
         const harga = button.dataset.harga;
-        let url = "{{ route('catering.update', ':id') }}".replace(':id', id);
+        let url = "{{ route('wardrobe.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `UPDATE CATERING ${type_catering}`;
+        document.getElementById('title_source').innerText = `UPDATE WARDROBE ${type_wardrobe}`;
 
-        document.getElementById('type_catering').value = type_catering;
+        document.getElementById('type_wardrobe').value = type_wardrobe;
         document.getElementById('deskripsi').value = deskripsi;
-        document.getElementById('porsi').value = porsi;
         document.getElementById('harga').value = harga;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
@@ -217,10 +215,10 @@
         status.classList.toggle('hidden');
     }
 
-    const cateringDelete = async (id, type_catering) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus Catering ${type_catering} ?`);
+    const wardrobeDelete = async (id, type_wardrobe) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus Wardrobe ${type_wardrobe} ?`);
         if (tanya) {
-            await axios.post(`/catering/${id}`, {
+            await axios.post(`/wardrobe/${id}`, {
                     '_method': 'DELETE',
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 })

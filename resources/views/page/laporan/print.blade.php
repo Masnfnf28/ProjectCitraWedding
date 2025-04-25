@@ -209,9 +209,12 @@
                     <thead>
                         <tr>
                             <th class="border border-1 border-black">NO</th>
+                            <th class="border border-1 border-black">KODE INVOICE</th>
                             <th class="border border-1 border-black">CLIENT</th>
-                            <th class="border border-1 border-black">TANGGAL ACARA</th>
                             <th class="border border-1 border-black">LOKASI</th>
+                            <th class="border border-1 border-black">TANGGAL</th>
+                            <th class="border border-1 border-black">STATUS</th>
+                            <th class="border border-1 border-black">TOTAL HARGA</th>
                     </thead>
                     <tbody>
                         @php
@@ -220,9 +223,12 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td class="border border-1 border-black tengah">{{ $no++ }}</td>
-                                <td class="border border-1 border-black text-left pl-2">{{ $d->client->namapl }}</td>
-                                <td class="border border-1 border-black pl-2 tengah">{{ $d->tgl_acara }}</td>
-                                <td class="border border-1 border-black text-left pl-2">{{ $d->lokasi }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->kode_invoice }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->client->namapl }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->client->alamat }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->tanggal }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->dibayar }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">Rp {{ number_format($d->total_bayar,2)}}</td>
                                 
                                 {{-- <td class="border border-1 border-black pl-2">{{ $d->user->name }}</td> --}}
                             </tr> 

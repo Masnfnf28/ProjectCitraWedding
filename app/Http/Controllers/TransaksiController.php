@@ -9,6 +9,7 @@ use App\Models\Makeup;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class TransaksiController extends Controller
@@ -59,7 +60,24 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'id_client' => $request->input('id_client'),
+            'kode_invoice' => $request->input('kode_invoice'),
+            'id_album' => $request->input('id_album'),
+            'id_makeup' => $request->input('id_makeup'),
+            'id_catering' => $request->input('id_catering'),
+            'tanggal' => $request->input('tanggal'),
+            'total_harga' => $request->input('total_bayar'), // total_harga = total_bayar
+            'id_user' => Auth::id(),
+            'total_bayar' => $request->input('total_bayar'),
+            'dibayar' => $request->dibayar ?? 'Belum Lunas',
+        ];
+
+        Transaksi::create($data);
+
+        return redirect()
+            ->route('transaksi.index')
+            ->with('message', 'Data Berhasil ditambahkan');
     }
 
     /**
@@ -83,7 +101,16 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+
+        // Update status pembayaran
+        $transaksi->update([
+            'dibayar' => $request->dibayar,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('transaksi.index')
+            ->with('success', 'Status pembayaran berhasil diubah!');
     }
 
     /**
@@ -91,6 +118,8 @@ class TransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Transaksi::findOrFail($id);
+        $data->delete();
+        return back()->with('message_delete','Data paket Sudah dihapus');
     }
 }

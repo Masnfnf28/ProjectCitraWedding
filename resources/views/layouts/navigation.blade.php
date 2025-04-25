@@ -43,9 +43,9 @@
                                 <x-dropdown-link :href="route('client.index')">
                                     {{ __('Client') }}
                                 </x-dropdown-link>           
-                                {{-- <x-dropdown-link :href="route('dashboard')">
-                                    {{ __('Service') }}
-                                </x-dropdown-link> --}}
+                                <x-dropdown-link :href="route('wardrobe.index')">
+                                    {{ __('Wardrobe') }}
+                                </x-dropdown-link>
                                 <x-dropdown-link :href="route('album.index')">
                                     {{ __('Album') }}
                                 </x-dropdown-link>
@@ -58,39 +58,21 @@
                                 <x-dropdown-link :href="route('tenda.index')">
                                     {{ __('Tenda') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link :href="route('dashboard')">
+                                    {{ __('Hiburan') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('dashboard')">
+                                    {{ __('Dekorasi') }}
+                                </x-dropdown-link>
                                
                             </x-slot>
                         </x-dropdown>
                     </li>
                 </div>
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <li class="relative list-none">
-                        <x-dropdown>
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div>Paket</div>
-    
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"> <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-    
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('dashboard')">
-                                    {{ __('Data Paket') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('dashboard')">
-                                    {{ __('Harga Paket') }}
-                                </x-dropdown-link>                               
-                            </x-slot>
-                        </x-dropdown>
-                    </li>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Paket') }}
+                    </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
                     <x-nav-link :href="route('transaksi.index')" :active="request()->routeIs('transaksi.index','transaksi.create')">
@@ -98,7 +80,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('pembayaran.index')" :active="request()->routeIs('pembayaran.index')">
                         {{ __('Pembayaran') }}
                     </x-nav-link>
                 </div>

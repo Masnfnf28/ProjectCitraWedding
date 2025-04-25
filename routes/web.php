@@ -4,15 +4,19 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\CateringController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DecorationController;
+use App\Http\Controllers\DekorasiController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MakeupController;
+use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TendaController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\WardrobeController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +37,9 @@ Route::middleware('auth')->group(function () {
 Route::resource('error',ErrorController::class);
 
 
-
-
+Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+Route::patch('/pembayaran/{id}/update-status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.update-status');
 
 
 
@@ -45,9 +50,11 @@ Route::resource('events', EventsController::class)->middleware('auth');
 Route::resource('album', AlbumController::class)->middleware('auth');
 Route::resource('catering', CateringController::class)->middleware('auth');
 Route::resource('tenda', TendaController::class)->middleware('auth');
-Route::resource('decoration', DecorationController::class)->middleware('auth');
-
+Route::resource('dekorasi', DekorasiController::class)->middleware('auth');
+Route::resource('paket', PaketController::class)->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
+Route::resource('wardrobe', WardrobeController::class)->middleware('auth');
+Route::resource('pembayaran', PembayaranController::class)->middleware('auth');
 
 
 

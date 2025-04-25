@@ -73,9 +73,11 @@
                                         <th scope="col" class="px-6 py-3">
                                             HARGA
                                         </th>
+                                        @can('role=ADMIN')
                                         <th scope="col" class="px-6 py-3">
                                             ACTION
                                         </th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,6 +100,7 @@
                                             <td class="px-5 py-3 bg-gray-100">
                                                 Rp{{ $album->harga }}
                                             </td>
+                                            @can('role=ADMIN')
                                             <td class="px-5 py-3">
                                                 <button type="button"
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
@@ -114,6 +117,7 @@
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
                                 </tbody>

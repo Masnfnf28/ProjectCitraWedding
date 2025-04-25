@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Paket extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'kode_paket',
+        'id_makeup',
+        'id_catering',
+        'id_album',
+        'id_tenda',
+        'id_hiburan',
+        'id_dekorasi',
+        'total_harga'
+    ];
+
+    protected $table = 'paket';
+
+    public function makeup(){
+        return $this->belongsTo(Makeup::class, 'id_makeup', 'id');
+    }
+    public function catering(){
+        return $this->belongsTo(Catering::class, 'id_catering', 'id');
+    }
+    public function album(){
+        return $this->belongsTo(Album::class, 'id_album', 'id');
+    }
+    public function tenda(){
+        return $this->belongsTo(Tenda::class, 'id_tenda', 'id');
+    }
+    public static function createCode(){
+        $latestCode = self::orderBy('kode_paket','desc')->value('kode_paket');
+        $latestCodeNumber = intval(substr($latestCode,6));
+        $nextCodeNumber = $latestCodeNumber ? $latestCodeNumber + 1 : 1;
+        $formattedCodeNumber = sprintf("%05d", $nextCodeNumber);
+        return 'PKTCWD' . $formattedCodeNumber;
+    }
+}

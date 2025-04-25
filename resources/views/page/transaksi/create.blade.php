@@ -27,78 +27,103 @@
                                         Invoice</label>
                                     <input type="text" id="kode_invoice" name="kode_invoice"
                                         value="{{ $kode_invoice }}"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Kode Transaksi" readonly required />
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        readonly required />
                                 </div>
                                 <div class="mb-5 w-full">
                                     <label for="id_client"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client</label>
-                                    <select class="js-example-placeholder-single js-states form-control w-full"
-                                        name="id_client" id="id_client" data-placeholder="Pilih Client">
-                                        <option value="" disabled selected>Pilih...</option>
+                                    <select name="id_client"
+                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+    bg-gray-50 text-sm rounded-lg block w-full p-2.5
+    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                        data-placeholder="Pilih Client">
+                                        <option value="" selected>Pilih...</option>
                                         @foreach ($client as $k)
-                                            <option value="{{ $k->id }}">{{ $k->namapl }}</option>
+                                            <option value="{{ $k->id }}"
+                                                {{ old('id_client') == $k->id ? 'selected' : '' }}>
+                                                {{ $k->namapl }}
+                                            </option>
                                         @endforeach
                                     </select>
+
+
                                 </div>
                             </div>
                             <div class="flex gap-5">
                                 <div class="mb-5 w-full">
                                     <label for="tanggal"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                    </label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal</label>
                                     <input type="date" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         required />
                                 </div>
                                 <div class="mb-5 w-full">
                                     <label for="id_album"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
-                                    <select class="js-example-placeholder-single js-states form-control w-full"
-                                        name="id_album" id="id_album" data-placeholder="Pilih Album">
+                                    <select
+                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+           bg-gray-50 text-sm rounded-lg block w-full p-2.5
+           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                        name="id_album" id="id_album">
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($album as $k)
-                                            <option value="{{ $k->id }}">{{ $k->jenis_album }}</option>
+                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
+                                                {{ $k->jenis_album }}
+                                            </option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="flex gap-5">
                                 <div class="mb-5 w-full">
                                     <label for="id_makeup"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make Up</label>
-                                    <select class="js-example-placeholder-single js-states form-control w-full"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make
+                                        Up</label>
+                                    <select
+                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+bg-gray-50 text-sm rounded-lg block w-full p-2.5
+dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                         name="id_makeup" id="id_makeup" data-placeholder="Pilih Make Up">
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($makeup as $k)
-                                            <option value="{{ $k->id }}">{{ $k->type_makeup }}</option>
+                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
+                                                {{ $k->type_makeup }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-5 w-full">
                                     <label for="id_catering"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catering</label>
-                                    <select class="js-example-placeholder-single js-states form-control w-full"
+                                    <select
+                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+bg-gray-50 text-sm rounded-lg block w-full p-2.5
+dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                         name="id_catering" id="id_catering" data-placeholder="Pilih Catering">
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($catering as $k)
-                                            <option value="{{ $k->id }}">{{ $k->type_catering }}</option>
+                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
+                                                {{ $k->type_catering }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="mb-5 w-full">
+                                    <label for="total_harga_display"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total
+                                        Harga</label>
+                                    <input type="text" id="total_harga_display" readonly
+                                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        placeholder="Total harga">
+                                    <input type="hidden" id="total_bayar" name="total_bayar">
+                                </div>
                             </div>
                             <div class="flex justify-between mt-5">
-                                <!-- Tombol Print -->
-                                <button type="submit"
-                                    class=" text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-blue-00 dark:hover:bg-blue-500 dark:focus:ring-blue-500">
-                                    Submit
-                                </button>
-                            
-                                <!-- Tombol Batal -->
                                 <a href="{{ route('transaksi.index') }}"
-                                    class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center dark:bg-red-00 dark:hover:bg-red-500 dark:focus:ring-red-500">
-                                    Batal
-                                </a>
+                                    class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center">Batal</a>
+                                <button type="submit"
+                                    class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center">Submit</button>
+
                             </div>
                         </form>
                     </div>
@@ -106,4 +131,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const album = document.querySelector('#id_album');
+            const makeup = document.querySelector('#id_makeup');
+            const catering = document.querySelector('#id_catering');
+            const totalHargaDisplay = document.querySelector('#total_harga_display');
+            const totalHargaInput = document.querySelector('#total_bayar');
+
+            function updateTotal() {
+                const albumHarga = parseInt(album?.selectedOptions[0]?.dataset?.harga || 0);
+                const makeupHarga = parseInt(makeup?.selectedOptions[0]?.dataset?.harga || 0);
+                const cateringHarga = parseInt(catering?.selectedOptions[0]?.dataset?.harga || 0);
+
+                const total = albumHarga + makeupHarga + cateringHarga;
+                totalHargaDisplay.value = "Rp " + total.toLocaleString('id-ID');
+                totalHargaInput.value = total;
+            }
+
+            album.addEventListener('change', updateTotal);
+            makeup.addEventListener('change', updateTotal);
+            catering.addEventListener('change', updateTotal);
+        });
+    </script>
 </x-app-layout>

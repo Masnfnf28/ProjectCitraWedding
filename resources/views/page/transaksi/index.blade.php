@@ -88,7 +88,7 @@
                                             {{ $t->dibayar }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->total_bayar }}
+                                            Rp{{ $t->total_bayar }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <button type="button" data-id="{{ $t->id }}"
@@ -134,8 +134,8 @@
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                 id="dibayar" name="dibayar" data-placeholder="Pilih Konsinyasi">
                                 <option value="">Pilih...</option>
-                                <option value="dibayar">Dibayar</option>
-                                <option value="belum dibayar">Belum Dibayar</option>
+                                <option value="Lunas">Lunas</option>
+                                <option value="Belum Lunas" selected>Belum Lunas</option>
                             </select>
                         </div>
                     </div>

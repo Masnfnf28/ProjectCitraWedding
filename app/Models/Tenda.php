@@ -15,4 +15,8 @@ class Tenda extends Model
     ];
 
     protected $table = 'tenda';
+
+    public function paket(){
+        return $this->hasMany(Paket::class,'id');
+    }
 }

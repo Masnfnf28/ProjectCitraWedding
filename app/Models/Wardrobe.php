@@ -5,23 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Catering extends Model
+class Wardrobe extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type_catering',
+        'type_wardrobe',
         'deskripsi',
-        'porsi',
         'harga',
     ];
 
-    protected $table = 'catering';
+    protected $table = 'wardrobe';
 
-    public function transaksi(){
-        return $this->hasMany(Transaksi::class, 'id');
-    }
     public function paket(){
         return $this->hasMany(Paket::class, 'id');
     }
+    
+
 }

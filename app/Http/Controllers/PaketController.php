@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use App\Models\Events;
-use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class LaporanController extends Controller
+class PaketController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('page.laporan.index');
+        //
     }
 
     /**
@@ -30,19 +27,7 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        $dari = request('dari', 'all');
-        $sampai = request('sampai', 'all');
-
-        $dari = ($dari === 'all') ? null : $dari;
-        $sampai = ($sampai === 'all') ? null : $sampai;
-
-        if($dari === null){
-            $data = Transaksi::all();
-        }else{
-            $data = Transaksi::whereBetween('tanggal', [$dari, $sampai])->get();
-        }
-        
-        return view('page.laporan.print')->with(['data' => $data]);
+        //
     }
 
     /**

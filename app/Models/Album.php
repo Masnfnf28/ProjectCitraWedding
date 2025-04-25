@@ -20,4 +20,7 @@ class Album extends Model
     public function transaksi(){
         return $this->hasMany(Transaksi::class, 'id');
     }
+    public function paket(){
+        return $this->hasMany(Paket::class, 'id');
+    }
 }
