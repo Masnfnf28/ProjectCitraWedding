@@ -91,7 +91,7 @@
                                             {{ $p->catering->type_catering }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $p->tenda->type_tenda }}
+                                            {{ $p->tenda->uk_tenda }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $p->dekorasi->type_dekorasi }}
@@ -109,7 +109,7 @@
                                                 data-wardrobe="{{ $p->wardrobe->type_wardrobe }}"
                                                 data-album="{{ $p->album->jenis_album }}"
                                                 data-catering="{{ $p->catering->type_catering }}"
-                                                data-tenda="{{ $p->tenda->type_tenda }}"
+                                                data-tenda="{{ $p->tenda->uk_tenda }}"
                                                 data-dekorasi="{{ $p->dekorasi->type_dekorasi }}"
                                                 data-hiburan="{{ $p->hiburan->type_hiburan }}"
                                                 onclick="editSourceModal(this)"
@@ -204,6 +204,34 @@
                                 @foreach ($wardrobe as $w)
                                     <option value="{{ $w->id }}" data-harga="{{ $w->harga }}">
                                         {{ $w->type_wardrobe }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_catering"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catering</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_catering" id="id_catering">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($catering as $c)
+                                    <option value="{{ $c->id }}" data-harga="{{ $c->harga }}">
+                                        {{ $c->type_catering }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_tenda"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tenda</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_tenda" id="id_tenda">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($tenda as $t)
+                                    <option value="{{ $t->id }}" data-harga_tenda="{{ $t->harga }}">
+                                        {{ $t->uk_tenda }}
                                     </option>
                                 @endforeach
                             </select>
