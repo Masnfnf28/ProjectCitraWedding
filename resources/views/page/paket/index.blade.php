@@ -159,9 +159,16 @@
                                 <option value="Belum Lunas" selected>Belum Lunas</option>
                             </select>
                         </div> --}}
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Paket
+                                </label>
+                            <input type="text" id="paket" name="paket"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan Paket">
+                        </div>
                         <div class="mb-5 w-full">
                             <label for="id_makeup"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make Up</label>
                             <select
                                 class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 name="id_makeup" id="id_makeup">
@@ -169,6 +176,34 @@
                                 @foreach ($makeup as $m)
                                     <option value="{{ $m->id }}" data-harga="{{ $m->harga }}">
                                         {{ $m->type_makeup }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_album"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_album" id="id_album">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($album as $a)
+                                    <option value="{{ $a->id }}" data-harga="{{ $a->harga }}">
+                                        {{ $a->jenis_album }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_wardrobe"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_wardrobe" id="id_wardrobe">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($wardrobe as $w)
+                                    <option value="{{ $w->id }}" data-harga="{{ $w->harga }}">
+                                        {{ $w->type_wardrobe }}
                                     </option>
                                 @endforeach
                             </select>
@@ -191,7 +226,7 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const dibayar = button.dataset.dibayar;
+        const id_makeup = button.dataset.id_bayar;
 
         let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
 
