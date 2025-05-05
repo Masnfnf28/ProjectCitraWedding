@@ -17,6 +17,7 @@ class Paket extends Model
         'id_tenda',
         'id_hiburan',
         'id_dekorasi',
+        'id_wardrobe',
         'total_harga'
     ];
 
@@ -33,6 +34,15 @@ class Paket extends Model
     }
     public function tenda(){
         return $this->belongsTo(Tenda::class, 'id_tenda', 'id');
+    }
+    public function hiburan(){
+        return $this->belongsTo(Hiburan::class, 'id_hiburan', 'id');
+    }
+    public function dekorasi(){
+        return $this->belongsTo(Dekorasi::class, 'id_dekorasi', 'id');
+    }
+    public function wardrobe(){
+        return $this->belongsTo(Wardrobe::class, 'id_wardrobe', 'id');
     }
     public static function createCode(){
         $latestCode = self::orderBy('kode_paket','desc')->value('kode_paket');

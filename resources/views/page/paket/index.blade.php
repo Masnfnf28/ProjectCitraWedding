@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
-            {{ __('TRANSAKSI') }}
+            {{ __('PAKET') }}
         </h2>
     </x-slot>
 
@@ -10,9 +10,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="p-4 bg-gray-100 rounded-xl mb-2 font-bold flex items-center justify-between ">
-                        <div>DATA TRANSAKSI</div>
+                        <div>DATA PAKET</div>
                         <div>
-                            <a href="{{ route('transaksi.create') }}" onclick="return functionAdd()"
+                            <a href="{{ route('paket.create') }}" onclick="return functionAdd()"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
                                 <i class="fi fi-sr-square-plus p-"></i></a>
                         </div>
@@ -26,28 +26,34 @@
                                         NO
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        KODE INVOICE
+                                        KODE PAKET
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        CLIENT
+                                        NAMA PAKET
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        TANGGAL
+                                        TYPE MAKEUP
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        ALBUM
+                                        TYPE ALBUM
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        MAKEUP
+                                        TYPE WARDROBE
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        CATERING
+                                        TYPE CATERING
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        DIBAYAR
+                                        TYPE TENDA
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        TOTAL BAYAR
+                                        TYPE DEKORASI
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        TYPE HIBURAN
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        TOTAL HARGA
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         ACTION
@@ -59,54 +65,68 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($transaksi as $key => $t)
+                                @foreach ($paket as $key => $p)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $transaksi->perPage() * ($transaksi->currentPage() - 1) + $key + 1 }}
+                                            {{ $paket->perPage() * ($paket->currentPage() - 1) + $key + 1 }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ $t->kode_invoice }}
+                                            {{ $p->kode_paket }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->client->namapl }}
+                                            {{ $p->paket }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->tanggal }}
+                                            {{ $p->makeup->type_makeup }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->album->jenis_album }}
+                                            {{ $p->album->jenis_album }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->makeup->type_makeup }}
+                                            {{ $p->wardrobe->type_wardrobe }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->catering->type_catering }}
+                                            {{ $p->catering->type_catering }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->dibayar }}
+                                            {{ $p->tenda->type_tenda }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Rp{{ $t->total_bayar }}
+                                            {{ $p->dekorasi->type_dekorasi }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <button type="button" data-id="{{ $t->id }}"
-                                                data-modal-target="sourceModal"
-                                                data-dibayar="{{ $t->dibayar }}" onclick="editSourceModal(this)"
+                                            {{ $p->hiburan->type_hiburan }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            Rp{{ $p->total_harga }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <button type="button" data-id="{{ $p->id }}"
+                                                data-modal-target="sourceModal" data-dibayar="{{ $p->dibayar }}"
+                                                data-makeup="{{ $p->makeup->type_makeup }}"
+                                                data-wardrobe="{{ $p->wardrobe->type_wardrobe }}"
+                                                data-album="{{ $p->album->jenis_album }}"
+                                                data-catering="{{ $p->catering->type_catering }}"
+                                                data-tenda="{{ $p->tenda->type_tenda }}"
+                                                data-dekorasi="{{ $p->dekorasi->type_dekorasi }}"
+                                                data-hiburan="{{ $p->hiburan->type_hiburan }}"
+                                                onclick="editSourceModal(this)"
                                                 class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                 Edit
                                             </button>
                                             <button
-                                                onclick="return transaksiDelete('{{ $t->id }}','{{ $t->client->namapl }}')"
-                                            class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
+                                                onclick="return transaksiDelete('{{ $p->id }}','{{ $p->client->namapl }}')"
+                                                class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
+                                                Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    {{ $transaksi->links() }}
+                    {{ $paket->links() }}
                 </div>
             </div>
         </div>
@@ -128,15 +148,29 @@
                 <form method="POST" id="formSourceModal">
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
-                        <div class="mb-5">
-                            <label for="dibayar"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
+                        {{-- <div class="mb-5">
+                            <label for="makeup"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">MAKEUP
                                 Pembayaran</label>
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                 id="dibayar" name="dibayar" data-placeholder="Pilih Konsinyasi">
                                 <option value="">Pilih...</option>
                                 <option value="Lunas">Lunas</option>
                                 <option value="Belum Lunas" selected>Belum Lunas</option>
+                            </select>
+                        </div> --}}
+                        <div class="mb-5 w-full">
+                            <label for="id_makeup"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_makeup" id="id_makeup">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($makeup as $m)
+                                    <option value="{{ $m->id }}" data-harga="{{ $m->harga }}">
+                                        {{ $m->type_makeup }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

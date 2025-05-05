@@ -7,6 +7,7 @@ use App\Http\Controllers\DecorationController;
 use App\Http\Controllers\DekorasiController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\HiburanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MakeupController;
 use App\Http\Controllers\PaketController;
@@ -55,6 +56,7 @@ Route::resource('paket', PaketController::class)->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
 Route::resource('wardrobe', WardrobeController::class)->middleware('auth');
 Route::resource('pembayaran', PembayaranController::class)->middleware('auth');
+Route::resource('hiburan', HiburanController::class)->middleware('auth');
 
 
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dekorasi;
+use App\Models\Hiburan;
 use Illuminate\Http\Request;
 
-class DekorasiController extends Controller
+class HiburanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class DekorasiController extends Controller
     public function index()
     {
         try {
-            $dekorasis = Dekorasi::paginate(3); // Harus menggunakan paginate, bukan all()
-            return view('page.dekorasi.index', compact('dekorasis'));
+            $hiburans = Hiburan::paginate(3); // Harus menggunakan paginate, bukan all()
+            return view('page.hiburan.index', compact('hiburans'));
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -35,17 +35,17 @@ class DekorasiController extends Controller
     {
         try {
             $data = [
-                'type_dekorasi' => $request->input('type_dekorasi'),
+                'type_hiburan' => $request->input('type_hiburan'),
                 'deskripsi' => $request->input('deskripsi'),
                 'harga' => $request->input('harga'),
             ];
-            Dekorasi::create($data);
+            Hiburan::create($data);
 
             // return back()->with('message_delete', 'Data Customer Sudah di Hapus');
 
             return redirect()
-                ->route('dekorasi.index')
-                ->with('message_insert', 'Data Dekorasi Sudah ditambahkan');
+                ->route('hiburan.index')
+                ->with('message_insert', 'Data Hiburan Sudah ditambahkan');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
@@ -76,19 +76,19 @@ class DekorasiController extends Controller
     {
         try {
             $data = [
-                'type_dekorasi' => $request->input('type_dekorasi'),
+                'type_hiburan' => $request->input('type_hiburan'),
                 'deskripsi' => $request->input('deskripsi'),
                 'harga' => $request->input('harga'),
             ];
 
 
-            $datas = Dekorasi::findOrFail($id);
+            $datas = Hiburan::findOrFail($id);
             $datas->update($data);
             // return back()->with('message_delete', 'Data Album Sudah dihapus');
 
             return redirect()
-                ->route('dekorasi.index')
-                ->with('message_insert', 'Data Dekorasi Sudah ditambahkan');
+                ->route('hiburan.index')
+                ->with('message_insert', 'Data Hiburan Sudah ditambahkan');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
@@ -102,9 +102,9 @@ class DekorasiController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = Dekorasi::findOrFail($id);
+            $data = Hiburan::findOrFail($id);
             $data->delete();
-            return back()->with('message_delete', 'Data Dekorasi Sudah dihapus');
+            return back()->with('message_delete', 'Data Hiburan Sudah dihapus');
         } catch (\Exception $e) {
             echo "<script>console.error('PHP Error: " .
                 addslashes($e->getMessage()) . "');</script>";
