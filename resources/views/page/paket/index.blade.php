@@ -29,7 +29,7 @@
                                         KODE PAKET
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        NAMA PAKET
+                                        JENIS PAKET
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         TYPE MAKEUP
@@ -44,7 +44,7 @@
                                         TYPE CATERING
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        TYPE TENDA
+                                        UKURAN TENDA
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         TYPE DEKORASI

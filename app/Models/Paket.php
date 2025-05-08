@@ -49,7 +49,7 @@ class Paket extends Model
         $latestCode = self::orderBy('kode_paket','desc')->value('kode_paket');
         $latestCodeNumber = intval(substr($latestCode,6));
         $nextCodeNumber = $latestCodeNumber ? $latestCodeNumber + 1 : 1;
-        $formattedCodeNumber = sprintf("%05d", $nextCodeNumber);
+        $formattedCodeNumber = sprintf("%03d", $nextCodeNumber);
         return 'PKTCWD' . $formattedCodeNumber;
     }
 }

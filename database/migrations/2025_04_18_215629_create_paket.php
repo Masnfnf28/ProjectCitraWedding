@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jenis_paket');
             $table->string('id_makeup');
             $table->string('id_catering');
+            $table->string('id_wardrobe');
             $table->string('id_album');
             $table->string('id_tenda');
             $table->string('id_hiburan');
