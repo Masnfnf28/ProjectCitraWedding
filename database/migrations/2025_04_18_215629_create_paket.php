@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
             $table->string('kode_paket');
+            $table->string('jenis_paket');
             $table->string('id_makeup');
             $table->string('id_catering');
             $table->string('id_album');

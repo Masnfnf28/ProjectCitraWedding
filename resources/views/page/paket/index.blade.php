@@ -76,10 +76,10 @@
                                             {{ $p->kode_paket }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $p->paket }}
+                                            {{ $p->jenis_paket }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $p->makeup->type_makeup }}
+                                            {{ $p->makeup->id_makeup }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $p->album->jenis_album }}
@@ -104,7 +104,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <button type="button" data-id="{{ $p->id }}"
-                                                data-modal-target="sourceModal" data-dibayar="{{ $p->dibayar }}"
+                                                data-modal-target="sourceModal" {{-- data-dibayar="{{ $p->dibayar }}" --}}
                                                 data-makeup="{{ $p->makeup->type_makeup }}"
                                                 data-wardrobe="{{ $p->wardrobe->type_wardrobe }}"
                                                 data-album="{{ $p->album->jenis_album }}"
@@ -161,7 +161,7 @@
                         </div> --}}
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Paket
-                                </label>
+                            </label>
                             <input type="text" id="paket" name="paket"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Masukan Paket">
@@ -196,7 +196,7 @@
                         </div>
                         <div class="mb-5 w-full">
                             <label for="id_wardrobe"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wardrobe</label>
                             <select
                                 class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 name="id_wardrobe" id="id_wardrobe">
@@ -236,6 +236,34 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_hiburan"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dekorasi</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_dekorasi" id="id_dekorasi">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($dekorasi as $d)
+                                    <option value="{{ $d->id }}" data-harga_dekorasi="{{ $d->harga }}">
+                                        {{ $d->type_dekorasi }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label for="id_hiburan"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hiburan</label>
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                name="id_hiburan" id="id_hiburan">
+                                <option value="" disabled selected>Pilih...</option>
+                                @foreach ($hiburan as $h)
+                                    <option value="{{ $h->id }}" data-harga_hiburan="{{ $h->harga }}">
+                                        {{ $h->type_hiburan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
                         <button type="submit" id="formSourceButton"
@@ -254,18 +282,24 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const id_makeup = button.dataset.id_bayar;
-
+        const id_makeup = button.dataset.id_makeup;
+        const id_paket = button.dataset.id_paket;
+        const id_album = button.dataset.id_album;
+        const id_wardrobe = button.dataset.id_wardrobe;
+        const id_catering = button.dataset.id_catering;
+        const id_tenda = button.dataset.id_tenda;
+        const id_hiburan = button.dataset.id_hiburan;
+        const id_dekorasi = button.dataset.id_dekorasi;
         let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
 
         // Set nilai untuk combobox
-        const dibayarSelect = document.getElementById('dibayar');
-        dibayarSelect.value = dibayar;
+        // const dibayarSelect = document.getElementById('dibayar');
+        // dibayarSelect.value = dibayar;
 
         // Jika menggunakan Select2 atau plugin serupa, trigger event change
-        $(dibayarSelect).trigger('change');
+        // $(dibayarSelect).trigger('change');
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);
@@ -291,24 +325,24 @@
         status.classList.toggle('hidden');
     }
 
-    const transaksiDelete = async (id, client) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus transaksi ${client}?`);
+    const paketDelete = async (id, client) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus ${paket}?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/transaksi/${id}`, {
+                const response = await axios.post(`/paket/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 });
 
                 if (response.status === 200) {
-                    alert('Transaksi berhasil dihapus');
+                    alert('Paket berhasil dihapus');
                     location.reload();
                 } else {
-                    alert('Gagal menghapus transaksi. Silakan coba lagi.');
+                    alert('Gagal menghapus paket. Silakan coba lagi.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Terjadi kesalahan saat menghapus transaksi. Silakan cek konsol untuk detail.');
+                alert('Terjadi kesalahan saat menghapus paket. Silakan cek konsol untuk detail.');
             }
         }
     }

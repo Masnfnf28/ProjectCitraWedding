@@ -35,8 +35,8 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client</label>
                                     <select name="id_client"
                                         class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-    bg-gray-50 text-sm rounded-lg block w-full p-2.5
-    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+     bg-gray-50 text-sm rounded-lg block w-full p-2.5
+     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                         data-placeholder="Pilih Client">
                                         <option value="" selected>Pilih...</option>
                                         @foreach ($client as $k)
