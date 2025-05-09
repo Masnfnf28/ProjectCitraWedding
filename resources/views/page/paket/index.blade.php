@@ -67,39 +67,39 @@
                                 @endphp
                                 @foreach ($paket as $key => $p)
                                     <tr
-                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" align="center">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $paket->perPage() * ($paket->currentPage() - 1) + $key + 1 }}
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->kode_paket }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->jenis_paket }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            {{ $p->makeup->id_makeup }}
+                                        <td class="px-auto py-auto">
+                                            {{ $p->makeup->type_makeup }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->album->jenis_album }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->wardrobe->type_wardrobe }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->catering->type_catering }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->tenda->uk_tenda }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->dekorasi->type_dekorasi }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             {{ $p->hiburan->type_hiburan }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-auto py-auto">
                                             Rp{{ $p->total_harga }}
                                         </td>
                                         <td class="px-6 py-4">
@@ -112,12 +112,13 @@
                                                 data-tenda="{{ $p->tenda->uk_tenda }}"
                                                 data-dekorasi="{{ $p->dekorasi->type_dekorasi }}"
                                                 data-hiburan="{{ $p->hiburan->type_hiburan }}"
+                                                data-jenis_paket="{{ $p->jenis_paket }}"
                                                 onclick="editSourceModal(this)"
                                                 class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                 Edit
                                             </button>
                                             <button
-                                                onclick="return transaksiDelete('{{ $p->id }}','{{ $p->client->namapl }}')"
+                                                onclick="return paketDelete('{{ $p->id }}')"
                                                 class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                 Delete</button>
                                         </td>
@@ -148,23 +149,20 @@
                 <form method="POST" id="formSourceModal">
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
-                        {{-- <div class="mb-5">
-                            <label for="makeup"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">MAKEUP
-                                Pembayaran</label>
+                        <div class="mb-5">
+                            <label for="jenis_paket"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                                Paket
+                                </label>
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                id="dibayar" name="dibayar" data-placeholder="Pilih Konsinyasi">
-                                <option value="">Pilih...</option>
-                                <option value="Lunas">Lunas</option>
-                                <option value="Belum Lunas" selected>Belum Lunas</option>
+                                id="jenis_paket" name="jenis_paket" data-placeholder="Pilih Konsinyasi">
+                                <option value="" disabled selected>Pilih Jenis Paket...</option>
+                                <option value="Wedding"> Paket Wedding</option>
+                                <option value="Khitan">Paket Khitanan</option>
+                                <option value="Engagement">Paket Engagement</option>
+                                <option value="Graduation">Paket Graduation</option>
+                                <option value="Birthday">Paket Birthday Party</option>
                             </select>
-                        </div> --}}
-                        <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Paket
-                            </label>
-                            <input type="text" id="paket" name="paket"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan Paket">
                         </div>
                         <div class="mb-5 w-full">
                             <label for="id_makeup"
@@ -282,6 +280,7 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
+        const jenis_paket = button.dataset.jenis_paket;
         const id_makeup = button.dataset.id_makeup;
         const id_paket = button.dataset.id_paket;
         const id_album = button.dataset.id_album;

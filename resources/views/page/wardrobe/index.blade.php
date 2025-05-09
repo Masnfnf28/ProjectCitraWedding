@@ -80,41 +80,42 @@
                                 </thead>
                                 <tbody>
                                     @php
-    $no = 1;
-@endphp
-@foreach ($wardrobe as $index => $item)
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4" align="center">
-        <th scope="row"
-            class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
-            {{ ($wardrobe->currentPage() - 1) * $wardrobe->perPage() + $loop->iteration }}
-        </th>
-        <td class="px-5 py-3">
-            {{ $item->type_wardrobe }}
-        </td>
-        <td class="px-5 py-3 bg-gray-100">
-            {{ $item->deskripsi }}
-        </td>
-        <td class="px-5 py-3 bg-gray-100">
-            Rp{{ $item->harga }}
-        </td>
-        <td class="px-5 py-3">
-            <button type="button"
-                class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
-                onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                data-id="{{ $item->id }}"
-                data-type_wardrobe="{{ $item->type_wardrobe }}"
-                data-deskripsi="{{ $item->deskripsi }}"
-                data-harga="{{ $item->harga }}">
-                <i class="fi fi-sr-file-edit"></i>
-            </button>
-            <button
-                class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                onclick="return wardrobeDelete('{{ $item->id }}','{{ $item->type_wardrobe }}')">
-                <i class="fi fi-sr-delete-document"></i>
-            </button>
-        </td>
-    </tr>
-@endforeach
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($wardrobe as $index => $item)
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
+                                            align="center">
+                                            <th scope="row"
+                                                class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100">
+                                                {{ ($wardrobe->currentPage() - 1) * $wardrobe->perPage() + $loop->iteration }}
+                                            </th>
+                                            <td class="px-5 py-3">
+                                                {{ $item->type_wardrobe }}
+                                            </td>
+                                            <td class="px-5 py-3 bg-gray-100">
+                                                {{ $item->deskripsi }}
+                                            </td>
+                                            <td class="px-5 py-3 bg-gray-100">
+                                                Rp{{ $item->harga }}
+                                            </td>
+                                            <td class="px-5 py-3">
+                                                <button type="button"
+                                                    class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
+                                                    onclick="editSourceModal(this)" data-modal-target="sourceModal"
+                                                    data-id="{{ $item->id }}"
+                                                    data-type_wardrobe="{{ $item->type_wardrobe }}"
+                                                    data-deskripsi="{{ $item->deskripsi }}"
+                                                    data-harga="{{ $item->harga }}">
+                                                    <i class="fi fi-sr-file-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
+                                                    onclick="return wardrobeDelete('{{ $item->id }}','{{ $item->type_wardrobe }}')">
+                                                    <i class="fi fi-sr-delete-document"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -154,8 +155,7 @@
                                 placeholder="Masukan Jenis">
                         </div>
                         <div class="">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
                             <textarea type="text" name="deskripsi" id="deskripsi"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" "> </textarea>
                         </div>
