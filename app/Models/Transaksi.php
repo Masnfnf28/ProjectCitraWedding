@@ -10,10 +10,7 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_album',
-        'id_makeup',
-        'id_user',
-        'id_catering',
+        'id_paket',
         'kode_invoice',
         'id_client',
         'tanggal',
@@ -23,10 +20,12 @@ class Transaksi extends Model
 
     protected $table = 'transaksi';
 
+    public function paket(){
+        return $this->belongsTo(Paket::class, 'id_paket', 'id');
+    }
     public function album(){
         return $this->belongsTo(Album::class, 'id_album', 'id');
     }
-
     public function makeup(){
         return $this->belongsTo(Makeup::class, 'id_makeup', 'id');
     }

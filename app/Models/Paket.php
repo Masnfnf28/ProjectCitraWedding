@@ -24,6 +24,9 @@ class Paket extends Model
 
     protected $table = 'paket';
 
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class,'id');
+    }
     public function makeup(){
         return $this->belongsTo(Makeup::class, 'id_makeup', 'id');
     }

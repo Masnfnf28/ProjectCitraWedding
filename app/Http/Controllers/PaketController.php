@@ -124,7 +124,27 @@ class PaketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'id_client' => $request->input('id_client'),
+            'kode_paket' => $request->input('kode_paket'),
+            'jenis_paket' => $request->input('jenis_paket'),
+            'id_album' => $request->input('id_album'),
+            'id_makeup' => $request->input('id_makeup'),
+            'id_catering' => $request->input('id_catering'),
+            'id_hiburan' => $request->input('id_hiburan'),
+            'id_tenda' => $request->input('id_tenda'),
+            'id_dekorasi' => $request->input('id_dekorasi'),
+            'id_wardrobe' => $request->input('id_wardrobe'),
+            // 'tanggal' => $request->input('tanggal'),
+            'total_harga' => $request->input('total_bayar'), // total_harga = total_bayar
+            'id_user' => Auth::id(),
+            'total_bayar' => $request->input('total_bayar'),
+            // 'dibayar' => $request->dibayar ?? 'Belum Lunas',
+        ];
+
+        $datas = Paket::findOrFail($id);
+        $datas->update($data);
+        return back()->with('message_delete','Data Paket Sudah Di Update');
     }
 
     /**
@@ -132,6 +152,8 @@ class PaketController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Paket::findOrFail($id);
+        $data->delete();
+        return back()->with('message_delete','Data Paket Sudah di Hapus');
     }
 }

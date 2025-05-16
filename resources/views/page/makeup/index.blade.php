@@ -39,7 +39,6 @@
                         </form>
                     </div> --}}
                 </div>
-                
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold flex justify-between items-center">
                         MAKEUP
@@ -140,7 +139,7 @@
                 </div>
                 <form method="POST" id="formSourceModal">
                     @csrf
-                    <div class="flex flex-col  p-4 space-y-6">
+                    <div class="flex flex-col p-4 space-y-2">
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Type
                                 Makeup</label>

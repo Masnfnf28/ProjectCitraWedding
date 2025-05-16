@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Laporan Events') }}
+            {{ __('Laporan') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,7 @@
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
                         <div class="flex items-center justify-between">
                             <div class="w-full">
-                                FORM INPUT LAPORAN EVENTS
+                                CETAK LAPORAN
                             </div>
                         </div>
                     </div>

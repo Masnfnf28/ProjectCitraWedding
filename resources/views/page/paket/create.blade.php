@@ -126,7 +126,7 @@
                                         name="id_tenda" id="id_tenda">
                                         <option value="" disabled selected>Pilih Ukuran Tenda...</option>
                                         @foreach ($tenda as $t)
-                                            <option value="{{ $t->id }}" data-harga="{{ $t->harga }}">
+                                            <option value="{{ $t->id }}" data-harga="{{ $t->harga_tenda }}">
                                                 {{ $t->uk_tenda }}
                                             </option>
                                         @endforeach

@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
-            {{ __('PAKET') }}
+            {{ __('DATA PAKET') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-10">
+        <div class="max-w-10xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="p-4 bg-gray-100 rounded-xl mb-2 font-bold flex items-center justify-between ">
-                        <div>DATA PAKET</div>
+                        <div> ADD PAKET</div>
                         <div>
                             <a href="{{ route('paket.create') }}" onclick="return functionAdd()"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
@@ -18,9 +18,9 @@
                         </div>
                     </div>
                     <div class="relative overflow-x-auto">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                                 <tr class="text-center font-semibold">
                                     <th scope="col" class="px-4 py-3">
                                         NO
@@ -66,13 +66,13 @@
                                     $no = 1;
                                 @endphp
                                 @foreach ($paket as $key => $p)
-                                    <tr
-                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" align="center">
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                        align="center">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $paket->perPage() * ($paket->currentPage() - 1) + $key + 1 }}
                                         </th>
-                                        <td class="px-auto py-auto">
+                                        <td class="px-5 py-5">
                                             {{ $p->kode_paket }}
                                         </td>
                                         <td class="px-auto py-auto">
@@ -100,27 +100,26 @@
                                             {{ $p->hiburan->type_hiburan }}
                                         </td>
                                         <td class="px-auto py-auto">
-                                            Rp{{ $p->total_harga }}
+                                            Rp {{ number_format($p->total_harga, 0, ',', '.') }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <button type="button" data-id="{{ $p->id }}"
-                                                data-modal-target="sourceModal" {{-- data-dibayar="{{ $p->dibayar }}" --}}
-                                                data-makeup="{{ $p->makeup->type_makeup }}"
-                                                data-wardrobe="{{ $p->wardrobe->type_wardrobe }}"
-                                                data-album="{{ $p->album->jenis_album }}"
-                                                data-catering="{{ $p->catering->type_catering }}"
-                                                data-tenda="{{ $p->tenda->uk_tenda }}"
-                                                data-dekorasi="{{ $p->dekorasi->type_dekorasi }}"
-                                                data-hiburan="{{ $p->hiburan->type_hiburan }}"
-                                                data-jenis_paket="{{ $p->jenis_paket }}"
-                                                onclick="editSourceModal(this)"
-                                                class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
-                                                Edit
+
+                                        <td class="px-6 py-4 flex justify-center gap-2">
+                                            <button type="button" onclick="editSourceModal(this)"
+                                                data-id="{{ $p->id }}" data-kode_paket="{{ $p->kode_paket }}"
+                                                data-jenis_paket="{{ $p->id_jenis_paket }}"
+                                                data-makeup="{{ $p->id_makeup }}"
+                                                data-wardrobe="{{ $p->id_wardrobe }}" data-album="{{ $p->id_album }}"
+                                                data-catering="{{ $p->id_catering }}" data-tenda="{{ $p->id_tenda }}"
+                                                data-dekorasi="{{ $p->id_dekorasi }}"
+                                                data-hiburan="{{ $p->id_hiburan }}"
+                                                class="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-lg text-base text-white flex items-center gap-1">
+                                                <i class="fi fi-sr-file-edit"></i>
                                             </button>
                                             <button
-                                                onclick="return paketDelete('{{ $p->id }}')"
-                                                class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
-                                                Delete</button>
+                                                onclick="return paketDelete('{{ $p->id }}', '{{ $p->kode_paket }}')"
+                                                class="bg-red-500 hover:bg-bg-red-300 px-4 py-2 rounded-lg text-base text-white">
+                                                <i class="fi fi-sr-delete-document"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -132,191 +131,227 @@
             </div>
         </div>
     </div>
-    <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
-        <div class="fixed inset-0 bg-black opacity-50"></div>
-        <div class="fixed inset-0 flex items-center justify-center">
-            <div class="w-full md:w-1/2 relative bg-white rounded-lg shadow mx-5">
-                <div class="flex items-start justify-between p-4 border-b rounded-t">
-                    <h3 class="text-xl font-semibold text-gray-900" id="title_source">
-                        Update Sumber Database
-                    </h3>
-                    <button type="button" onclick="sourceModalClose(this)" data-modal-target="sourceModal"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
-                        data-modal-hide="defaultModal">
-                        <i class="fa-solid fa-xmark"></i>
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden" id="sourceModal">
+        <div class="relative w-full max-w-3xl max-h-screen overflow-y-auto bg-white rounded-lg shadow mx-4 my-8">
+            <div class="flex items-start justify-between p-4 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900" id="title_source">
+                    Update Data Paket
+                </h3>
+                <button type="button" onclick="sourceModalClose(this)" data-modal-target="sourceModal"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+                    data-modal-hide="defaultModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form class="w-full px-6 py-4" method="POST" id="formSourceModal">
+                @csrf
+
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <!-- Jenis Paket -->
+                    <div class="w-full">
+                        <label for="jenis_paket" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Jenis Paket
+                        </label>
+                        <select class="js-example-placeholder-single js-states form-control w-full" id="jenis_paket"
+                            name="id_jenis_paket" data-placeholder="Pilih Konsinyasi">
+                            <option value="" disabled selected>Pilih Jenis Paket...</option>
+                            <option value="Wedding"> Paket Wedding</option>
+                            <option value="Khitan">Paket Khitanan</option>
+                            <option value="Engagement">Paket Engagement</option>
+                            <option value="Graduation">Paket Graduation</option>
+                            <option value="Birthday">Paket Birthday Party</option>
+                        </select>
+                    </div>
+
+                    <!-- Make Up -->
+                    <div class="w-full">
+                        <label for="id_makeup" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Make Up
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_makeup" id="id_makeup">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($makeup as $m)
+                                <option value="{{ $m->id }}" data-harga="{{ $m->harga }}">
+                                    {{ $m->type_makeup }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <!-- Album -->
+                    <div class="w-full">
+                        <label for="id_album" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Album
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_album" id="id_album">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($album as $a)
+                                <option value="{{ $a->id }}" data-harga="{{ $a->harga }}">
+                                    {{ $a->jenis_album }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Wardrobe -->
+                    <div class="w-full">
+                        <label for="id_wardrobe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Wardrobe
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_wardrobe" id="id_wardrobe">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($wardrobe as $w)
+                                <option value="{{ $w->id }}" data-harga="{{ $w->harga }}">
+                                    {{ $w->type_wardrobe }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <!-- Catering -->
+                    <div class="w-full">
+                        <label for="id_catering" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Catering
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_catering" id="id_catering">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($catering as $c)
+                                <option value="{{ $c->id }}" data-harga="{{ $c->harga }}">
+                                    {{ $c->type_catering }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Tenda -->
+                    <div class="w-full">
+                        <label for="id_tenda" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Tenda
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_tenda" id="id_tenda">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($tenda as $t)
+                                <option value="{{ $t->id }}" data-harga_tenda="{{ $t->harga }}">
+                                    {{ $t->uk_tenda }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <!-- Dekorasi -->
+                    <div class="w-full">
+                        <label for="id_dekorasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Dekorasi
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_dekorasi" id="id_dekorasi">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($dekorasi as $d)
+                                <option value="{{ $d->id }}" data-harga_dekorasi="{{ $d->harga }}">
+                                    {{ $d->type_dekorasi }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Hiburan -->
+                    <div class="w-full">
+                        <label for="id_hiburan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Hiburan
+                        </label>
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            name="id_hiburan" id="id_hiburan">
+                            <option value="" disabled selected>Pilih...</option>
+                            @foreach ($hiburan as $h)
+                                <option value="{{ $h->id }}" data-harga_hiburan="{{ $h->harga }}">
+                                    {{ $h->type_hiburan }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
+                    <button type="submit" id="formSourceButton"
+                        class="bg-green-400 w-40 h-10 rounded-xl hover:bg-green-500">
+                        Simpan
+                    </button>
+                    <button type="button" data-modal-target="sourceModal" onclick="sourceModalClose(this)"
+                        class="bg-red-500 w-40 h-10 rounded-xl text-white hover:shadow-lg hover:bg-red-600">
+                        Batal
                     </button>
                 </div>
-                <form method="POST" id="formSourceModal">
-                    @csrf
-                    <div class="flex flex-col  p-4 space-y-6">
-                        <div class="mb-5">
-                            <label for="jenis_paket"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                                Paket
-                                </label>
-                            <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                id="jenis_paket" name="jenis_paket" data-placeholder="Pilih Konsinyasi">
-                                <option value="" disabled selected>Pilih Jenis Paket...</option>
-                                <option value="Wedding"> Paket Wedding</option>
-                                <option value="Khitan">Paket Khitanan</option>
-                                <option value="Engagement">Paket Engagement</option>
-                                <option value="Graduation">Paket Graduation</option>
-                                <option value="Birthday">Paket Birthday Party</option>
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_makeup"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make Up</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_makeup" id="id_makeup">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($makeup as $m)
-                                    <option value="{{ $m->id }}" data-harga="{{ $m->harga }}">
-                                        {{ $m->type_makeup }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_album"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_album" id="id_album">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($album as $a)
-                                    <option value="{{ $a->id }}" data-harga="{{ $a->harga }}">
-                                        {{ $a->jenis_album }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_wardrobe"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wardrobe</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_wardrobe" id="id_wardrobe">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($wardrobe as $w)
-                                    <option value="{{ $w->id }}" data-harga="{{ $w->harga }}">
-                                        {{ $w->type_wardrobe }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_catering"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catering</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_catering" id="id_catering">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($catering as $c)
-                                    <option value="{{ $c->id }}" data-harga="{{ $c->harga }}">
-                                        {{ $c->type_catering }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_tenda"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tenda</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_tenda" id="id_tenda">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($tenda as $t)
-                                    <option value="{{ $t->id }}" data-harga_tenda="{{ $t->harga }}">
-                                        {{ $t->uk_tenda }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_hiburan"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dekorasi</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_dekorasi" id="id_dekorasi">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($dekorasi as $d)
-                                    <option value="{{ $d->id }}" data-harga_dekorasi="{{ $d->harga }}">
-                                        {{ $d->type_dekorasi }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-5 w-full">
-                            <label for="id_hiburan"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hiburan</label>
-                            <select
-                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                name="id_hiburan" id="id_hiburan">
-                                <option value="" disabled selected>Pilih...</option>
-                                @foreach ($hiburan as $h)
-                                    <option value="{{ $h->id }}" data-harga_hiburan="{{ $h->harga }}">
-                                        {{ $h->type_hiburan }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
-                        <button type="submit" id="formSourceButton"
-                            class="bg-green-400 m-2 w-40 h-10 rounded-xl hover:bg-green-500">Simpan</button>
-                        <button type="button" data-modal-target="sourceModal" onclick="sourceModalClose(this)"
-                            class="bg-red-500 m-2 w-40 h-10 rounded-xl text-white hover:shadow-lg hover:bg-red-600">Batal</button>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+
 </x-app-layout>
 
 <script>
     const editSourceModal = (button) => {
-        const formModal = document.getElementById('formSourceModal');
-        const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const jenis_paket = button.dataset.jenis_paket;
-        const id_makeup = button.dataset.id_makeup;
-        const id_paket = button.dataset.id_paket;
-        const id_album = button.dataset.id_album;
-        const id_wardrobe = button.dataset.id_wardrobe;
-        const id_catering = button.dataset.id_catering;
-        const id_tenda = button.dataset.id_tenda;
-        const id_hiburan = button.dataset.id_hiburan;
-        const id_dekorasi = button.dataset.id_dekorasi;
-        let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
+        const jenisPaket = button.dataset.jenis_paket;
+        const kodepaket = button.dataset.kode_paket;
+        const jenis_paket=button.getAttribute('data-jenis_makeup');
+        const makeup = button.getAttribute('data-makeup');
+        const wardrobe = button.getAttribute('data-wardrobe');
+        const album = button.getAttribute('data-album');
+        const catering = button.getAttribute('data-catering');
+        const tenda = button.getAttribute('data-tenda');
+        const dekorasi = button.getAttribute('data-dekorasi');
+        const hiburan = button.getAttribute('data-hiburan');
 
-        let status = document.getElementById(modalTarget);
+        // Set value ke form yang benar
+        document.getElementById('jenis_paket').value = jenis_paket;
+        document.getElementById('id_makeup').value = makeup;
+        document.getElementById('id_album').value = album;
+        document.getElementById('id_wardrobe').value = wardrobe;
+        document.getElementById('id_catering').value = catering;
+        document.getElementById('id_tenda').value = tenda;
+        document.getElementById('id_dekorasi').value = dekorasi;
+        document.getElementById('id_hiburan').value = hiburan;
+        document.getElementById('title_source').innerText = `UPDATE PAKET ${kodepaket}`;
 
-        // Set nilai untuk combobox
-        // const dibayarSelect = document.getElementById('dibayar');
-        // dibayarSelect.value = dibayar;
+        // Buka modal
+        const modal = document.getElementById('sourceModal');
+        if (modal) modal.classList.remove('hidden');
 
-        // Jika menggunakan Select2 atau plugin serupa, trigger event change
-        // $(dibayarSelect).trigger('change');
+        // Ganti action form
+        const form = document.getElementById('formSourceModal');
+        form.setAttribute('action', `/paket/${id}`);
 
-        document.getElementById('formSourceButton').innerText = 'Simpan';
-        document.getElementById('formSourceModal').setAttribute('action', url);
+        // Hapus input method PATCH sebelumnya
+        form.querySelectorAll('input[name="_method"]').forEach(el => el.remove());
 
-        let csrfToken = document.createElement('input');
-        csrfToken.setAttribute('type', 'hidden');
-        csrfToken.setAttribute('name', '_token');
-        csrfToken.setAttribute('value', '{{ csrf_token() }}');
-        formModal.appendChild(csrfToken);
-
-        let methodInput = document.createElement('input');
+        // Tambah method PATCH
+        const methodInput = document.createElement('input');
         methodInput.setAttribute('type', 'hidden');
         methodInput.setAttribute('name', '_method');
         methodInput.setAttribute('value', 'PATCH');
-        formModal.appendChild(methodInput);
+        form.appendChild(methodInput);
 
-        status.classList.toggle('hidden');
+        document.getElementById('formSourceButton').innerText = 'Update';
     }
+
 
     const sourceModalClose = (button) => {
         const modalTarget = button.dataset.modalTarget;
@@ -324,8 +359,8 @@
         status.classList.toggle('hidden');
     }
 
-    const paketDelete = async (id, client) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus ${paket}?`);
+    const paketDelete = async (id, kode_paket) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_paket}?`);
         if (tanya) {
             try {
                 const response = await axios.post(`/paket/${id}`, {

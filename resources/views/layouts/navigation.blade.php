@@ -104,7 +104,7 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('transaksi.index')">
+                                <x-dropdown-link :href="route('dashboard')">
                                     {{ __('Booking') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('pembayaran.index')">
