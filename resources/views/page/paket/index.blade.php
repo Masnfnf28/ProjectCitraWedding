@@ -106,7 +106,7 @@
                                         <td class="px-6 py-4 flex justify-center gap-2">
                                             <button type="button" onclick="editSourceModal(this)"
                                                 data-id="{{ $p->id }}" data-kode_paket="{{ $p->kode_paket }}"
-                                                data-jenis_paket="{{ $p->id_jenis_paket }}"
+                                                data-jenis_paket="{{ $p->jenis_paket }}"
                                                 data-makeup="{{ $p->id_makeup }}"
                                                 data-wardrobe="{{ $p->id_wardrobe }}" data-album="{{ $p->id_album }}"
                                                 data-catering="{{ $p->id_catering }}" data-tenda="{{ $p->id_tenda }}"
@@ -155,7 +155,7 @@
                         </label>
                         <select class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" id="id_jenis_paket"
                             name="id_jenis_paket" data-placeholder="Pilih Konsinyasi">
-                            <option value="" disabled selected>Pilih Jenis Paket...</option>
+                            <option value="">Pilih Jenis Paket...</option>
                             <option value="Wedding" > Paket Wedding</option>
                             <option value="Khitan" >Paket Khitanan</option>
                             <option value="Engagement" >Paket Engagement</option>
@@ -321,7 +321,7 @@
         const hiburan = button.getAttribute('data-hiburan');
 
         // Set value ke form yang benar
-        document.getElementById('id_jenis_paket').value = jenis_paket;
+        document.getElementById('id_jenis_paket').value = jenis_paket.trim();;
         document.getElementById('id_makeup').value = makeup;
         document.getElementById('id_album').value = album;
         document.getElementById('id_wardrobe').value = wardrobe;
