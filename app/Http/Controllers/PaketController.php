@@ -126,8 +126,8 @@ class PaketController extends Controller
     {
         $data = [
             'id_client' => $request->input('id_client'),
-            'kode_paket' => $request->input('kode_paket'),
-            'jenis_paket' => $request->input('jenis_paket'),
+            // 'kode_paket' => $request->input('kode_paket'),
+            'jenis_paket' => $request->input('id_jenis_paket'),
             'id_album' => $request->input('id_album'),
             'id_makeup' => $request->input('id_makeup'),
             'id_catering' => $request->input('id_catering'),
@@ -136,9 +136,9 @@ class PaketController extends Controller
             'id_dekorasi' => $request->input('id_dekorasi'),
             'id_wardrobe' => $request->input('id_wardrobe'),
             // 'tanggal' => $request->input('tanggal'),
-            'total_harga' => $request->input('total_bayar'), // total_harga = total_bayar
+            // 'total_harga' => $request->input('total_harga'), // total_harga = total_bayar
             'id_user' => Auth::id(),
-            'total_bayar' => $request->input('total_bayar'),
+            // 'total_bayar' => $request->input('total_bayar'),
             // 'dibayar' => $request->dibayar ?? 'Belum Lunas',
         ];
 

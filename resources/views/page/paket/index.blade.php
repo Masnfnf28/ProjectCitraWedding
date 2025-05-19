@@ -153,14 +153,15 @@
                         <label for="jenis_paket" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Jenis Paket
                         </label>
-                        <select class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" id="id_jenis_paket"
-                            name="id_jenis_paket" data-placeholder="Pilih Konsinyasi">
+                        <select
+                            class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            id="id_jenis_paket" name="id_jenis_paket" data-placeholder="Pilih Konsinyasi">
                             <option value="">Pilih Jenis Paket...</option>
-                            <option value="Wedding" > Paket Wedding</option>
-                            <option value="Khitan" >Paket Khitanan</option>
-                            <option value="Engagement" >Paket Engagement</option>
-                            <option value="Graduation" >Paket Graduation</option>
-                            <option value="Birthday" >Paket Birthday Party</option>
+                            <option value="Wedding"> Paket Wedding</option>
+                            <option value="Khitan">Paket Khitanan</option>
+                            <option value="Engagement">Paket Engagement</option>
+                            <option value="Graduation">Paket Graduation</option>
+                            <option value="Birthday">Paket Birthday Party</option>
                         </select>
                     </div>
 
@@ -309,19 +310,18 @@
 <script>
     const editSourceModal = (button) => {
         const id = button.dataset.id;
-        // const jenisPaket = button.dataset.jenis_paket;
+        const jenisPaket = button.dataset.jenis_paket;
         const kodepaket = button.dataset.kode_paket;
-        const jenis_paket=button.getAttribute('data-jenis_paket');
-        const makeup = button.getAttribute('data-makeup');
-        const wardrobe = button.getAttribute('data-wardrobe');
-        const album = button.getAttribute('data-album');
-        const catering = button.getAttribute('data-catering');
-        const tenda = button.getAttribute('data-tenda');
-        const dekorasi = button.getAttribute('data-dekorasi');
-        const hiburan = button.getAttribute('data-hiburan');
+        const makeup = button.dataset.makeup;
+        const wardrobe = button.dataset.wardrobe;
+        const album = button.dataset.album;
+        const catering = button.dataset.catering;
+        const tenda = button.dataset.tenda;
+        const dekorasi = button.dataset.dekorasi;
+        const hiburan = button.dataset.hiburan;
 
-        // Set value ke form yang benar
-        document.getElementById('id_jenis_paket').value = jenis_paket.trim();;
+        // Set value ke form modal
+        document.getElementById('id_jenis_paket').value = jenisPaket.trim();
         document.getElementById('id_makeup').value = makeup;
         document.getElementById('id_album').value = album;
         document.getElementById('id_wardrobe').value = wardrobe;
@@ -329,35 +329,28 @@
         document.getElementById('id_tenda').value = tenda;
         document.getElementById('id_dekorasi').value = dekorasi;
         document.getElementById('id_hiburan').value = hiburan;
-        document.getElementById('title_source').innerText = `UPDATE PAKET ${kodepaket}`;
 
-        // Buka modal
-        const modal = document.getElementById('sourceModal');
-        if (modal) modal.classList.remove('hidden');
-
-        // Ganti action form
+        // Set action form update, misalnya /paket/{id}
         const form = document.getElementById('formSourceModal');
-        form.setAttribute('action', `/paket/${id}`);
+        form.action = `/paket/${id}`; // Pastikan ini sesuai route Anda
+        form.method = 'POST';
 
-        // Hapus input method PATCH sebelumnya
-        form.querySelectorAll('input[name="_method"]').forEach(el => el.remove());
+        // Tambah input hidden _method = PUT untuk update
+        if (!form.querySelector('input[name="_method"]')) {
+            const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'PUT';
+            form.appendChild(methodInput);
+        }
 
-        // Tambah method PATCH
-        const methodInput = document.createElement('input');
-        methodInput.setAttribute('type', 'hidden');
-        methodInput.setAttribute('name', '_method');
-        methodInput.setAttribute('value', 'PATCH');
-        form.appendChild(methodInput);
+        // Tampilkan modal
+        document.getElementById('sourceModal').classList.remove('hidden');
+    };
 
-        document.getElementById('formSourceButton').innerText = 'Update';
-    }
-
-
-    const sourceModalClose = (button) => {
-        const modalTarget = button.dataset.modalTarget;
-        let status = document.getElementById(modalTarget);
-        status.classList.toggle('hidden');
-    }
+    const sourceModalClose = () => {
+        document.getElementById('sourceModal').classList.add('hidden');
+    };
 
     const paketDelete = async (id, kode_paket) => {
         let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_paket}?`);
