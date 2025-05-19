@@ -153,14 +153,14 @@
                         <label for="jenis_paket" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Jenis Paket
                         </label>
-                        <select class="js-example-placeholder-single js-states form-control w-full" id="jenis_paket"
+                        <select class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" id="id_jenis_paket"
                             name="id_jenis_paket" data-placeholder="Pilih Konsinyasi">
                             <option value="" disabled selected>Pilih Jenis Paket...</option>
-                            <option value="Wedding"> Paket Wedding</option>
-                            <option value="Khitan">Paket Khitanan</option>
-                            <option value="Engagement">Paket Engagement</option>
-                            <option value="Graduation">Paket Graduation</option>
-                            <option value="Birthday">Paket Birthday Party</option>
+                            <option value="Wedding" > Paket Wedding</option>
+                            <option value="Khitan" >Paket Khitanan</option>
+                            <option value="Engagement" >Paket Engagement</option>
+                            <option value="Graduation" >Paket Graduation</option>
+                            <option value="Birthday" >Paket Birthday Party</option>
                         </select>
                     </div>
 
@@ -309,9 +309,9 @@
 <script>
     const editSourceModal = (button) => {
         const id = button.dataset.id;
-        const jenisPaket = button.dataset.jenis_paket;
+        // const jenisPaket = button.dataset.jenis_paket;
         const kodepaket = button.dataset.kode_paket;
-        const jenis_paket=button.getAttribute('data-jenis_makeup');
+        const jenis_paket=button.getAttribute('data-jenis_paket');
         const makeup = button.getAttribute('data-makeup');
         const wardrobe = button.getAttribute('data-wardrobe');
         const album = button.getAttribute('data-album');
@@ -321,7 +321,7 @@
         const hiburan = button.getAttribute('data-hiburan');
 
         // Set value ke form yang benar
-        document.getElementById('jenis_paket').value = jenis_paket;
+        document.getElementById('id_jenis_paket').value = jenis_paket;
         document.getElementById('id_makeup').value = makeup;
         document.getElementById('id_album').value = album;
         document.getElementById('id_wardrobe').value = wardrobe;
