@@ -124,9 +124,35 @@ class PaketController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $album = Album::find($request->input('id_album'));
+        $makeup = Makeup::find($request->input('id_makeup'));
+        $catering = Catering::find($request->input('id_catering'));
+        $hiburan = Hiburan::find($request->input('id_hiburan'));
+        $tenda = Tenda::find($request->input('id_tenda'));
+        $dekorasi = Dekorasi::find($request->input('id_dekorasi'));
+        $wardrobe = Wardrobe::find($request->input('id_wardrobe'));
+        // $jenisPaket = JenisPaket::find($request->input('id_jenis_paket'));
+
+        // Pastikan semua relasi ditemukan
+        if (
+            !$album || !$makeup || !$catering || !$hiburan ||
+            !$tenda || !$dekorasi || !$wardrobe
+        ) {
+            return back()->with('error', 'Ada komponen paket yang tidak ditemukan.');
+        }
+
+        $totalHarga =
+            $album->harga +
+            $makeup->harga +
+            $catering->harga +
+            $hiburan->harga +
+            $tenda->harga_tenda +
+            $dekorasi->harga +
+            $wardrobe->harga ;
+            // $jenisPaket->harga;
+
         $data = [
             'id_client' => $request->input('id_client'),
-            // 'kode_paket' => $request->input('kode_paket'),
             'jenis_paket' => $request->input('id_jenis_paket'),
             'id_album' => $request->input('id_album'),
             'id_makeup' => $request->input('id_makeup'),
@@ -135,17 +161,16 @@ class PaketController extends Controller
             'id_tenda' => $request->input('id_tenda'),
             'id_dekorasi' => $request->input('id_dekorasi'),
             'id_wardrobe' => $request->input('id_wardrobe'),
-            // 'tanggal' => $request->input('tanggal'),
-            // 'total_harga' => $request->input('total_harga'), // total_harga = total_bayar
             'id_user' => Auth::id(),
-            // 'total_bayar' => $request->input('total_bayar'),
-            // 'dibayar' => $request->dibayar ?? 'Belum Lunas',
+            'total_harga' => $totalHarga,
         ];
 
         $datas = Paket::findOrFail($id);
         $datas->update($data);
-        return back()->with('message_delete','Data Paket Sudah Di Update');
+
+        return back()->with('message_delete', 'Data Paket Sudah Di Update');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -154,6 +179,6 @@ class PaketController extends Controller
     {
         $data = Paket::findOrFail($id);
         $data->delete();
-        return back()->with('message_delete','Data Paket Sudah di Hapus');
+        return back()->with('message_delete', 'Data Paket Sudah di Hapus');
     }
 }

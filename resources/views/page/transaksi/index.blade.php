@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
-            {{ __('TRANSAKSI') }}
+            {{ __('BOOKING') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-10">
+        <div class="max-w-10xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="p-4 bg-gray-100 rounded-xl mb-2 font-bold flex items-center justify-between ">
-                        <div>DATA TRANSAKSI</div>
+                        <div>DATA BOOOKING</div>
                         <div>
                             <a href="{{ route('transaksi.create') }}" onclick="return functionAdd()"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
@@ -32,16 +32,22 @@
                                         CLIENT
                                     </th>
                                     <th scope="col" class="px-4 py-3">
+                                        KODE PAKET
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        JENIS PAKET
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
                                         TANGGAL
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        ALBUM
+                                        TANGGAL ACARA
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        MAKEUP
+                                        BIAYA TAMBAHAN
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        CATERING
+                                        STATUS
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         DIBAYAR
@@ -73,27 +79,33 @@
                                             {{ $t->client->namapl }}
                                         </td>
                                         <td class="px-6 py-4">
+                                            {{ $t->paket->kode_paket }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $t->paket->jenis_paket }}
+                                        </td>
+                                        <td class="px-6 py-4">
                                             {{ $t->tanggal }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->album->jenis_album }}
+                                            {{ $t->tanggal_acara }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->makeup->type_makeup }}
+                                            {{ $t->biaya_tambahan }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->catering->type_catering }}
+                                            {{ $t->status }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->dibayar }}
+                                            {{ $t->pembayaran }}
                                         </td>
                                         <td class="px-6 py-4">
                                             Rp{{ $t->total_bayar }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <button type="button" data-id="{{ $t->id }}"
-                                                data-modal-target="sourceModal"
-                                                data-dibayar="{{ $t->dibayar }}" onclick="editSourceModal(this)"
+                                                data-modal-target="sourceModal" data-tanggal_acara="{{ $t->tanggal_acara}}"
+                                                data-pembayaran="{{ $t->pembayaran }}" onclick="editSourceModal(this)"
                                                 class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                 Edit
                                             </button>
@@ -129,14 +141,25 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="mb-5">
-                            <label for="dibayar"
+                            <label for="pembayaran"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
                                 Pembayaran</label>
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                id="dibayar" name="dibayar" data-placeholder="Pilih Konsinyasi">
+                                id="pembayaran" name="pembayaran" data-placeholder="Pilih Status">
                                 <option value="">Pilih...</option>
+                                <option value="Dana Pertama">Dana Pertama</option>
                                 <option value="Lunas">Lunas</option>
-                                <option value="Belum Lunas" selected>Belum Lunas</option>
+                            </select>
+                        </div>
+                        <div class="mb-5">
+                            <label for="status"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
+                                Booking</label>
+                            <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                id="pembayaran" name="pembayaran" data-placeholder="Pilih Status">
+                                <option value="">Pilih...</option>
+                                <option value="Baru" selected>Baru Booking</option>
+                                <option value="Selesai">Selesai</option>
                             </select>
                         </div>
                     </div>
@@ -157,18 +180,19 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const dibayar = button.dataset.dibayar;
+        const pembayaran= button.dataset.pembayaran;
+        const status = button.dataset.status;
 
         let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
 
         // Set nilai untuk combobox
-        const dibayarSelect = document.getElementById('dibayar');
-        dibayarSelect.value = dibayar;
+        const pembayaranSelect = document.getElementById('pemabayaran');
+        pembayaranSelect.value = pembayaran;
 
         // Jika menggunakan Select2 atau plugin serupa, trigger event change
-        $(dibayarSelect).trigger('change');
+        $(pembayaranSelect).trigger('change');
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);

@@ -46,8 +46,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-
-
                                 </div>
                             </div>
                             <div class="flex gap-5">
@@ -59,37 +57,26 @@
                                         required />
                                 </div>
                                 <div class="mb-5 w-full">
-                                    <label for="id_album"
+                                    <label for="tanggal_acara"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
-                                    <select
-                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-           bg-gray-50 text-sm rounded-lg block w-full p-2.5
-           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                        name="id_album" id="id_album">
-                                        <option value="" disabled selected>Pilih...</option>
-                                        @foreach ($album as $k)
-                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
-                                                {{ $k->jenis_album }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
+                                    <input type="date" id="tanggal_acara" name="tanggal_acara" value="{{ date('Y-m-d') }}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        required />
                                 </div>
                             </div>
                             <div class="flex gap-5">
                                 <div class="mb-5 w-full">
-                                    <label for="id_makeup"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make
-                                        Up</label>
+                                    <label for="id_paket"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Paket</label>
                                     <select
                                         class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
 bg-gray-50 text-sm rounded-lg block w-full p-2.5
 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                        name="id_makeup" id="id_makeup" data-placeholder="Pilih Make Up">
+                                        name="id_paket" id="id_paket" data-placeholder="Pilih Paket">
                                         <option value="" disabled selected>Pilih...</option>
-                                        @foreach ($makeup as $k)
-                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
-                                                {{ $k->type_makeup }}</option>
+                                        @foreach ($paket as $p)
+                                            <option value="{{ $p->id }}" data-total_harga="{{ $p->total_harga }}">
+                                                {{ $p->kode_paket }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -102,10 +89,10 @@ bg-gray-50 text-sm rounded-lg block w-full p-2.5
 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                         name="id_catering" id="id_catering" data-placeholder="Pilih Catering">
                                         <option value="" disabled selected>Pilih...</option>
-                                        @foreach ($catering as $k)
+                                        {{-- @foreach ($catering as $k)
                                             <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
                                                 {{ $k->type_catering }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="mb-5 w-full">

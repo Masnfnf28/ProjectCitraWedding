@@ -14,8 +14,12 @@ class Transaksi extends Model
         'kode_invoice',
         'id_client',
         'tanggal',
-        'dibayar',
-        'total_bayar'
+        'tanggal_acara',
+        'biaya_tambahan',
+        'status',
+        'pembayaran',
+        'id_user',
+        'total_bayar',
     ];
 
     protected $table = 'transaksi';
