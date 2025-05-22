@@ -144,8 +144,8 @@
             <h2 class="text-3xl font-playfair text-rose-700 mb-6">Hubungi Kami</h2>
             <p class="text-lg mb-2">📧 Email: <a href="mailto:info@citrawedding.com"
                     class="text-rose-500 hover:underline">info@citrawedding.com</a></p>
-            <p class="text-lg">📞 Telp: <a href="tel:081234567890"
-                    class="text-rose-500 hover:underline">0812-3456-7890</a></p>
+            <p class="text-lg">📞 Telp: <a href="tel:083827148222"
+                    class="text-rose-500 hover:underline">0838-2714-8222</a></p>
         </div>
     </section>
 
