@@ -33,7 +33,7 @@
                                 <div class="mb-5 w-full">
                                     <label for="id_client"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client</label>
-                                    <select name="id_client"
+                                    <select name="id_client" id="id_client"
                                         class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
      bg-gray-50 text-sm rounded-lg block w-full p-2.5
      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -59,7 +59,8 @@
                                 <div class="mb-5 w-full">
                                     <label for="tanggal_acara"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Album</label>
-                                    <input type="date" id="tanggal_acara" name="tanggal_acara" value="{{ date('Y-m-d') }}"
+                                    <input type="date" id="tanggal_acara" name="tanggal_acara"
+                                        value="{{ date('Y-m-d') }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         required />
                                 </div>
@@ -67,7 +68,8 @@
                             <div class="flex gap-5">
                                 <div class="mb-5 w-full">
                                     <label for="id_paket"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Paket</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode
+                                        Paket</label>
                                     <select
                                         class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
 bg-gray-50 text-sm rounded-lg block w-full p-2.5
@@ -75,31 +77,17 @@ dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                         name="id_paket" id="id_paket" data-placeholder="Pilih Paket">
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($paket as $p)
-                                            <option value="{{ $p->id }}" data-total_harga="{{ $p->total_harga }}">
+                                            <option value="{{ $p->id }}"
+                                                data-total_harga="{{ $p->total_harga }}">
                                                 {{ $p->kode_paket }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-5 w-full">
-                                    <label for="id_catering"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catering</label>
-                                    <select
-                                        class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-bg-gray-50 text-sm rounded-lg block w-full p-2.5
-dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                        name="id_catering" id="id_catering" data-placeholder="Pilih Catering">
-                                        <option value="" disabled selected>Pilih...</option>
-                                        {{-- @foreach ($catering as $k)
-                                            <option value="{{ $k->id }}" data-harga="{{ $k->harga }}">
-                                                {{ $k->type_catering }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
-                                <div class="mb-5 w-full">
-                                    <label for="total_harga_display"
+                                    <label for="total_harga"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total
                                         Harga</label>
-                                    <input type="text" id="total_harga_display" readonly
+                                    <input type="text" id="total_harga" readonly
                                         class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         placeholder="Total harga">
                                     <input type="hidden" id="total_bayar" name="total_bayar">
@@ -121,25 +109,18 @@ dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const album = document.querySelector('#id_album');
-            const makeup = document.querySelector('#id_makeup');
-            const catering = document.querySelector('#id_catering');
-            const totalHargaDisplay = document.querySelector('#total_harga_display');
-            const totalHargaInput = document.querySelector('#total_bayar');
+            const paket = document.querySelector('#id_paket'); // dropdown paket
+            const totalHarga = document.querySelector('#total_harga'); // input tampil harga (text)
+            const totalHargaInput = document.querySelector('#total_bayar'); // input hidden (submit)
 
-            function updateTotal() {
-                const albumHarga = parseInt(album?.selectedOptions[0]?.dataset?.harga || 0);
-                const makeupHarga = parseInt(makeup?.selectedOptions[0]?.dataset?.harga || 0);
-                const cateringHarga = parseInt(catering?.selectedOptions[0]?.dataset?.harga || 0);
+            paket.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const harga = parseInt(selectedOption.dataset.total_harga || 0);
 
-                const total = albumHarga + makeupHarga + cateringHarga;
-                totalHargaDisplay.value = "Rp " + total.toLocaleString('id-ID');
-                totalHargaInput.value = total;
-            }
-
-            album.addEventListener('change', updateTotal);
-            makeup.addEventListener('change', updateTotal);
-            catering.addEventListener('change', updateTotal);
+                totalHarga.value = "Rp " + harga.toLocaleString('id-ID');
+                totalHargaInput.value = harga;
+            });
         });
     </script>
+
 </x-app-layout>

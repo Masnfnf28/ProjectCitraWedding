@@ -100,7 +100,7 @@
                                             {{ $t->pembayaran }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Rp{{ $t->total_bayar }}
+                                            Rp {{ number_format ($t->total_bayar, 0, ',', '.') }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <button type="button" data-id="{{ $t->id }}"

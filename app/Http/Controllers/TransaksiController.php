@@ -38,16 +38,11 @@ class TransaksiController extends Controller
     public function create()
     {
         $paket = Paket::all();
-        // $makeup = Makeup::all();
         $user = User::all();
-        // $catering = Catering::all();
         $client = Client::all();
         $kode_invoice = Transaksi::createCode();
         return view('page.transaksi.create', compact('kode_invoice'))->with([
-            // 'album' => $album,
-            // 'makeup' => $makeup,
             'user' => $user,
-            // 'catering' => $catering,
             'paket' => $paket,
             'client' => $client,
         ]);
@@ -58,24 +53,18 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = [
-        //     'id_client' => $request->input('id_client'),
-        //     'kode_invoice' => $request->input('kode_invoice'),
-        //     'id_album' => $request->input('id_album'),
-        //     'id_makeup' => $request->input('id_makeup'),
-        //     'id_catering' => $request->input('id_catering'),
-        //     'tanggal' => $request->input('tanggal'),
-        //     'total_harga' => $request->input('total_bayar'), // total_harga = total_bayar
-        //     'id_user' => Auth::id(),
-        //     'total_bayar' => $request->input('total_bayar'),
-        //     'dibayar' => $request->dibayar ?? 'Belum Lunas',
-        // ];
+        Transaksi::create([
+            'kode_invoice' => $request->kode_invoice,
+            'id_client' => $request->id_client,
+            'tanggal' => $request->tanggal,
+            'tanggal_acara' => $request->tanggal_acara,
+            'id_paket' => $request->id_paket,
+            'total_bayar' => $request->total_bayar,
+            'id_user' => Auth::id(),
+        ]);
 
-        // Transaksi::create($data);
 
-        // return redirect()
-        //     ->route('transaksi.index')
-        //     ->with('message', 'Data Berhasil ditambahkan');
+        return redirect()->route('transaksi.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
