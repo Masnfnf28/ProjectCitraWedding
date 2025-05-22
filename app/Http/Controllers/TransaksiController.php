@@ -88,11 +88,24 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data = [
+            'id_pembayaran' => $request->input('id_pembayaran'),
+            'id_status' => $request->input('id_status'),
+            'id_user' => Auth::id(),
+        ];
+
+        $datas  = Transaksi::findOrFail($id);
+        $datas->update($data);
+
+        return back()->with('message_delete', 'Data Transksi Sudah Di Update');
+
+
         // $transaksi = Transaksi::findOrFail($id);
 
         // // Update status pembayaran
         // $transaksi->update([
-        //     'dibayar' => $request->dibayar,
+        //     'pembayaran' => $request->pembayaran,
+        //     'status' => $request->status,
         // ]);
 
         // // Redirect dengan pesan sukses
@@ -105,8 +118,8 @@ class TransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        // $data = Transaksi::findOrFail($id);
-        // $data->delete();
-        // return back()->with('message_delete','Data paket Sudah dihapus');
+        $data = Transaksi::findOrFail($id);
+        $data->delete();
+        return back()->with('message_delete','Data paket Sudah dihapus');
     }
 }

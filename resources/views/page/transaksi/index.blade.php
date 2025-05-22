@@ -100,18 +100,20 @@
                                             {{ $t->pembayaran }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Rp {{ number_format ($t->total_bayar, 0, ',', '.') }}
+                                            Rp {{ number_format($t->total_bayar, 0, ',', '.') }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <button type="button" data-id="{{ $t->id }}"
-                                                data-modal-target="sourceModal" data-tanggal_acara="{{ $t->tanggal_acara}}"
-                                                data-pembayaran="{{ $t->pembayaran }}" onclick="editSourceModal(this)"
+                                            <button type="button" onclick="editSourceModal(this)"
+                                                data-id="{{ $t->id }}" data-modal-target="sourceModal"
+                                                data-tanggal_acara="{{ $t->tanggal_acara }}"
+                                                data-pembayaran="{{ $t->pembayaran }}"
+                                                data-status="{{ $t->status }}"
                                                 class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                 Edit
                                             </button>
                                             <button
                                                 onclick="return transaksiDelete('{{ $t->id }}','{{ $t->client->namapl }}')"
-                                            class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
+                                                class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -137,17 +139,24 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <form method="POST" id="formSourceModal">
+                <form method="POST" id="formSourceModal"> 
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="mb-5">
                             <label for="pembayaran"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
                                 Pembayaran</label>
-                            <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                            {{-- <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                 id="pembayaran" name="pembayaran" data-placeholder="Pilih Status">
                                 <option value="">Pilih...</option>
                                 <option value="Dana Pertama">Dana Pertama</option>
+                                <option value="Lunas">Lunas</option>
+                            </select> --}}
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                id="id_pembayaran" name="id_pembayaran" data-placeholder="Pilih Status Pembayaran">
+                                <option value="">Pilih Status Pembayaran...</option>
+                                <option value="Dana Pertama"> Dana Pertama</option>
                                 <option value="Lunas">Lunas</option>
                             </select>
                         </div>
@@ -156,7 +165,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
                                 Booking</label>
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                id="pembayaran" name="pembayaran" data-placeholder="Pilih Status">
+                                id="id_status" name="id_status" data-placeholder="Pilih Status">
                                 <option value="">Pilih...</option>
                                 <option value="Baru" selected>Baru Booking</option>
                                 <option value="Selesai">Selesai</option>
@@ -177,39 +186,58 @@
 
 <script>
     const editSourceModal = (button) => {
-        const formModal = document.getElementById('formSourceModal');
-        const modalTarget = button.dataset.modalTarget;
+        // const formModal = document.getElementById('formSourceModal');
+        // const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const pembayaran= button.dataset.pembayaran;
+        const pembayaran = button.dataset.pembayaran;
         const status = button.dataset.status;
 
-        let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
+        document.getElementById('id_pembayaran').value = pembayaran;
+        document.getElementById('id_status').value = status;
 
-        let status = document.getElementById(modalTarget);
+         const form = document.getElementById('formSourceModal');
+        form.action = `/transaksi/${id}`; // Pastikan ini sesuai route Anda
+        form.method = 'POST';
 
-        // Set nilai untuk combobox
-        const pembayaranSelect = document.getElementById('pemabayaran');
-        pembayaranSelect.value = pembayaran;
+        // Tambah input hidden _method = PUT untuk update
+        if (!form.querySelector('input[name="_method"]')) {
+            const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'PUT';
+            form.appendChild(methodInput);
+        }
 
-        // Jika menggunakan Select2 atau plugin serupa, trigger event change
-        $(pembayaranSelect).trigger('change');
+         // Tampilkan modal
+        document.getElementById('sourceModal').classList.remove('hidden');
 
-        document.getElementById('formSourceButton').innerText = 'Simpan';
-        document.getElementById('formSourceModal').setAttribute('action', url);
+        // let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);
 
-        let csrfToken = document.createElement('input');
-        csrfToken.setAttribute('type', 'hidden');
-        csrfToken.setAttribute('name', '_token');
-        csrfToken.setAttribute('value', '{{ csrf_token() }}');
-        formModal.appendChild(csrfToken);
+        // let status = document.getElementById(modalTarget);
 
-        let methodInput = document.createElement('input');
-        methodInput.setAttribute('type', 'hidden');
-        methodInput.setAttribute('name', '_method');
-        methodInput.setAttribute('value', 'PATCH');
-        formModal.appendChild(methodInput);
+        // // Set nilai untuk combobox
+        // const pembayaranSelect = document.getElementById('pembayaran');
+        // pembayaranSelect.value = pembayaran;
 
-        status.classList.toggle('hidden');
+        // // Jika menggunakan Select2 atau plugin serupa, trigger event change
+        // $(pembayaranSelect).trigger('change');
+
+        // document.getElementById('formSourceButton').innerText = 'Simpan';
+        // document.getElementById('formSourceModal').setAttribute('action', url);
+
+        // let csrfToken = document.createElement('input');
+        // csrfToken.setAttribute('type', 'hidden');
+        // csrfToken.setAttribute('name', '_token');
+        // csrfToken.setAttribute('value', '{{ csrf_token() }}');
+        // formModal.appendChild(csrfToken);
+
+        // let methodInput = document.createElement('input');
+        // methodInput.setAttribute('type', 'hidden');
+        // methodInput.setAttribute('name', '_method');
+        // methodInput.setAttribute('value', 'PATCH');
+        // formModal.appendChild(methodInput);
+
+        // status.classList.toggle('hidden');
     }
 
     const sourceModalClose = (button) => {
