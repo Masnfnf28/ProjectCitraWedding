@@ -113,7 +113,7 @@
                         “Pelayanan Citra Wedding luar biasa! Semua detail diperhatikan, hasilnya sangat memuaskan dan
                         sesuai impian.”
                     </blockquote>
-                    <footer class="text-sm text-rose-600 font-semibold">— Anisa & Dimas</footer>
+                    <footer class="text-sm text-rose-600 font-semibold">— Anisa & Taufik</footer>
                 </div>
 
                 <!-- Card 2 -->
