@@ -12,9 +12,11 @@
                     <div class="p-4 bg-gray-100 rounded-xl mb-2 font-bold flex items-center justify-between ">
                         <div> ADD PAKET</div>
                         <div>
+                            @can('role=OWNER')
                             <a href="{{ route('paket.create') }}" onclick="return functionAdd()"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
                                 <i class="fi fi-sr-square-plus p-"></i></a>
+                                @endcan
                         </div>
                     </div>
                     <div class="relative overflow-x-auto">
@@ -55,9 +57,11 @@
                                     <th scope="col" class="px-4 py-3">
                                         TOTAL HARGA
                                     </th>
+                                    @can('role=OWNER')
                                     <th scope="col" class="px-4 py-3">
                                         ACTION
                                     </th>
+                                    @endcan
                                 </tr>
                                 </tr>
                             </thead>
@@ -102,7 +106,7 @@
                                         <td class="px-auto py-auto">
                                             Rp {{ number_format($p->total_harga, 0, ',', '.') }}
                                         </td>
-
+                                        @can('role=OWNER')
                                         <td class="px-6 py-4 flex justify-center gap-2">
                                             <button type="button" onclick="editSourceModal(this)"
                                                 data-id="{{ $p->id }}" data-kode_paket="{{ $p->kode_paket }}"
@@ -121,6 +125,7 @@
                                                 <i class="fi fi-sr-delete-document"></i>
                                             </button>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

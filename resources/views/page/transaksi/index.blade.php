@@ -52,9 +52,11 @@
                                     <th scope="col" class="px-4 py-3">
                                         TOTAL BAYAR
                                     </th>
+                                    @can('role=OWNER')
                                     <th scope="col" class="px-4 py-3">
                                         ACTION
                                     </th>
+                                    @endcan
                                 </tr>
                                 </tr>
                             </thead>
@@ -96,6 +98,7 @@
                                         <td class="px-6 py-4">
                                             Rp {{ number_format($t->total_bayar, 0, ',', '.') }}
                                         </td>
+                                        @can('role=OWNER')
                                         <td class="px-6 py-4">
                                             <button type="button" onclick="editSourceModal(this)"
                                                 data-id="{{ $t->id }}" data-modal-target="sourceModal"
@@ -109,6 +112,7 @@
                                                 onclick="return transaksiDelete('{{ $t->id }}','{{ $t->client->namapl }}')"
                                                 class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -23,6 +23,7 @@
                 </div>
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <li class="relative list-none">
+                        @can('role=OWNER')
                         <x-dropdown>
                             <x-slot name="trigger">
                                 <button
@@ -68,6 +69,7 @@
 
                             </x-slot>
                         </x-dropdown>
+                        @endcan
                     </li>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
