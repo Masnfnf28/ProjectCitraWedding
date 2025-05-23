@@ -39,8 +39,8 @@
             <div class="hidden md:flex gap-2">
                 <a href="/login"
                     class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full text-sm transition">Login</a>
-                <a href="/register"
-                    class="border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white px-4 py-2 rounded-full text-sm transition">Register</a>
+                {{-- <a href="/register"
+                    class="border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white px-4 py-2 rounded-full text-sm transition">Register</a> --}}
             </div>
         </div>
     </nav>
