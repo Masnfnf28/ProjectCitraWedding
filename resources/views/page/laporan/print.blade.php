@@ -227,7 +227,7 @@
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->client->namapl }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->client->alamat }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->tanggal }}</td>
-                                <td class="border border-1 border-black pl-2 tengah">{{ $d->dibayar }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->status }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">Rp {{ number_format($d->total_bayar,2)}}</td>
                                 
                                 {{-- <td class="border border-1 border-black pl-2">{{ $d->user->name }}</td> --}}

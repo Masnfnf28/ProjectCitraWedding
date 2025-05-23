@@ -89,8 +89,8 @@ class TransaksiController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'id_pembayaran' => $request->input('id_pembayaran'),
-            'id_status' => $request->input('id_status'),
+            'pembayaran' => $request->input('pembayaran'),
+            'status' => $request->input('status'),
             'id_user' => Auth::id(),
         ];
 

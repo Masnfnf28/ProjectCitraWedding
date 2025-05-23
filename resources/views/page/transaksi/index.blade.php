@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="relative overflow-x-auto">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr class="text-center font-semibold">
@@ -42,9 +42,6 @@
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         TANGGAL ACARA
-                                    </th>
-                                    <th scope="col" class="px-4 py-3">
-                                        BIAYA TAMBAHAN
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         STATUS
@@ -89,9 +86,6 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $t->tanggal_acara }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $t->biaya_tambahan }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $t->status }}
@@ -154,7 +148,7 @@
                             </select> --}}
                             <select
                                 class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                id="id_pembayaran" name="id_pembayaran" data-placeholder="Pilih Status Pembayaran">
+                                id="pembayaran" name="pembayaran" data-placeholder="Pilih Status Pembayaran">
                                 <option value="">Pilih Status Pembayaran...</option>
                                 <option value="Dana Pertama"> Dana Pertama</option>
                                 <option value="Lunas">Lunas</option>
@@ -165,9 +159,9 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
                                 Booking</label>
                             <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                id="id_status" name="id_status" data-placeholder="Pilih Status">
+                                id="status" name="status" data-placeholder="Pilih Status">
                                 <option value="">Pilih...</option>
-                                <option value="Baru" selected>Baru Booking</option>
+                                <option value="Baru">Baru Booking</option>
                                 <option value="Selesai">Selesai</option>
                             </select>
                         </div>
@@ -192,8 +186,8 @@
         const pembayaran = button.dataset.pembayaran;
         const status = button.dataset.status;
 
-        document.getElementById('id_pembayaran').value = pembayaran;
-        document.getElementById('id_status').value = status;
+        document.getElementById('pembayaran').value = pembayaran;
+        document.getElementById('status').value = status;
 
          const form = document.getElementById('formSourceModal');
         form.action = `/transaksi/${id}`; // Pastikan ini sesuai route Anda
@@ -246,7 +240,7 @@
         status.classList.toggle('hidden');
     }
 
-    const transaksiDelete = async (id, client) => {
+    const transaksiDelete = async (id, ) => {
         let tanya = confirm(`Apakah anda yakin untuk menghapus transaksi ${client}?`);
         if (tanya) {
             try {

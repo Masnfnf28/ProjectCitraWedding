@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->date('tanggal_acara');
             $table->integer('biaya_tambahan')->nullable();
-            $table->enum('status',['baru','selesai']);
+            $table->enum('status',['Baru','Selesai']);
             $table->enum('pembayaran',['Dana Pertama','Lunas']);
             $table->string('id_user');
             $table->integer('total_bayar');
