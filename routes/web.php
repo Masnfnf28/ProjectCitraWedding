@@ -36,11 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('users', UserController::class);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
 });
 
-Route::resource('error',ErrorController::class);
+Route::resource('error', ErrorController::class);
 
 
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
@@ -65,4 +67,4 @@ Route::resource('hiburan', HiburanController::class)->middleware('auth');
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

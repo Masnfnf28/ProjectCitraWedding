@@ -92,7 +92,17 @@
 
         <!-- Page Content -->
         <main>
-            {{ $slot }}
+            <div class="px-3 py-3">
+                @if (session()->has('success'))
+                    <x-toast-success :message="session('success')"></x-toast-success>
+                @elseif(session()->has('error'))
+                    <x-toast-error :message="session('error')"></x-toast-error>
+                @elseif(session()->has('warning'))
+                    <x-toast-warning :message="session('warning')"></x-toast-warning>
+                @endif
+
+                {{ $slot }}
+            </div>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -12,16 +15,23 @@ class UserController extends Controller
      */
     public function index()
     {
-        //  $user = User::all(); // atau gunakan paginate jika datanya banyak
-        // return view('page.user.index', compact('user'));
+        $users = User::when(request()->search, function ($query) {
+            $query->where('name', 'like', '%' . request()->search . '%');
+        })->paginate(10);
+
+        return view('users.index', compact('users'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $role = "test";
+        $categories = [];
+        return view('users.create', compact('role', 'categories'));
     }
 
     /**
@@ -29,7 +39,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'name' => 'nullable|string',
+            'email' => 'required|string|unique:users',
+            'password' => 'required|string',
+            'password_confirmations' => 'required|same:password',
+            'role' => 'required',
+        ]);
+
+        try {
+            $user = new User([
+                'name'  => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'password' =>  Hash::make($request->password),
+            ]);
+            // dd($user);
+            $user->save();
+            return redirect()->route('users.index')
+                ->with('success', 'User ' . $user->name . ' has been added successfully!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -43,24 +75,51 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email,' . $id,
+            'role' => 'required',
+            'password_confirmation' => 'nullable|same:password'
+        ]);
+
+        try {
+            $user = User::find($id);
+            // dd($user->first());
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
+            return redirect()->route('users.index')
+                ->with('success', 'User ' . $user->name . ' has been updated successfully!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if ($user) {
+            $user->delete();
+            return redirect()->route('users.index')
+                ->with('success', 'User ' . $user->name . ' has been deleted successfully!');
+        } else {
+            return back()->with('error', 'User not found!');
+        }
     }
 }
