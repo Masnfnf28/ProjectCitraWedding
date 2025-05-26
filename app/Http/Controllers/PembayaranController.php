@@ -9,11 +9,11 @@ class PembayaranController extends Controller
 {
     public function index(Request $request)
     {
-        $status = $request->query('status', 'all');
-        
+        $status = $request->query('status', 'all', 'Lunas', 'Dana Pertama');
+
         $transaksis = Transaksi::query()
             ->when($status !== 'all', function ($query) use ($status) {
-                $query->where('dibayar', $status);
+                $query->where('pembayaran', $status);
             })
             ->with(['client', 'album', 'makeup', 'catering'])
             ->latest()
@@ -28,13 +28,10 @@ class PembayaranController extends Controller
     // Update status pembayaran
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
-            'dibayar' => 'required|in:Lunas,Belum Lunas'
-        ]);
-
         $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update(['dibayar' => $request->dibayar]);
+        $transaksi->pembayaran = $request->pembayaran;
+        $transaksi->save();
 
-        return back()->with('success', 'Status pembayaran berhasil diubah!');
+        return redirect()->route('pembayaran.index')->with('success', 'Status pembayaran berhasil diubah!');
     }
 }

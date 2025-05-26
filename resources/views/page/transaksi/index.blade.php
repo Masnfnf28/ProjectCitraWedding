@@ -38,7 +38,7 @@
                                         JENIS PAKET
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        TANGGAL
+                                        TANGGAL BOOKING
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         TANGGAL ACARA
@@ -53,9 +53,9 @@
                                         TOTAL BAYAR
                                     </th>
                                     @can('role=OWNER')
-                                    <th scope="col" class="px-4 py-3">
-                                        ACTION
-                                    </th>
+                                        <th scope="col" class="px-4 py-3">
+                                            ACTION
+                                        </th>
                                     @endcan
                                 </tr>
                                 </tr>
@@ -75,7 +75,7 @@
                                             {{ $t->kode_invoice }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $t->client->namapl }}
+                                            {{ $t->client->namapl }} - {{ $t->client->namapr}}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $t->paket->kode_paket }}
@@ -89,9 +89,14 @@
                                         <td class="px-6 py-4">
                                             {{ $t->tanggal_acara }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            {{ $t->status }}
+                                        <td>
+                                            @if (Carbon\Carbon::parse($t->tanggal_acara)->isPast())
+                                                Selesai
+                                            @else
+                                                {{ $t->status }}
+                                            @endif
                                         </td>
+
                                         <td class="px-6 py-4">
                                             {{ $t->pembayaran }}
                                         </td>
@@ -99,19 +104,19 @@
                                             Rp {{ number_format($t->total_bayar, 0, ',', '.') }}
                                         </td>
                                         @can('role=OWNER')
-                                        <td class="px-6 py-4">
-                                            <button type="button" onclick="editSourceModal(this)"
-                                                data-id="{{ $t->id }}" data-modal-target="sourceModal"
-                                                data-tanggal_acara="{{ $t->tanggal_acara }}"
-                                                data-pembayaran="{{ $t->pembayaran }}"
-                                                data-status="{{ $t->status }}"
-                                                class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
-                                                Edit
-                                            </button>
-                                            <button
-                                                onclick="return transaksiDelete('{{ $t->id }}','{{ $t->client->namapl }}')"
-                                                class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
-                                        </td>
+                                            <td class="px-6 py-4">
+                                                <button type="button" onclick="editSourceModal(this)"
+                                                    data-id="{{ $t->id }}" data-modal-target="sourceModal"
+                                                    data-tanggal_acara="{{ $t->tanggal_acara }}"
+                                                    data-pembayaran="{{ $t->pembayaran }}"
+                                                    data-status="{{ $t->status }}"
+                                                    class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onclick="return transaksiDelete('{{ $t->id }}','{{ $t->client->namapl }}')"
+                                                    class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">Delete</button>
+                                            </td>
                                         @endcan
                                     </tr>
                                 @endforeach
@@ -137,7 +142,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <form method="POST" id="formSourceModal"> 
+                <form method="POST" id="formSourceModal">
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="mb-5">
@@ -162,10 +167,11 @@
                             <label for="status"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status
                                 Booking</label>
-                            <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                            <select
+                                class="appearance-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 id="status" name="status" data-placeholder="Pilih Status">
                                 <option value="">Pilih...</option>
-                                <option value="Baru">Baru Booking</option>
+                                <option value="Baru Booking">Baru Booking</option>
                                 <option value="Selesai">Selesai</option>
                             </select>
                         </div>
@@ -193,7 +199,7 @@
         document.getElementById('pembayaran').value = pembayaran;
         document.getElementById('status').value = status;
 
-         const form = document.getElementById('formSourceModal');
+        const form = document.getElementById('formSourceModal');
         form.action = `/transaksi/${id}`; // Pastikan ini sesuai route Anda
         form.method = 'POST';
 
@@ -206,7 +212,7 @@
             form.appendChild(methodInput);
         }
 
-         // Tampilkan modal
+        // Tampilkan modal
         document.getElementById('sourceModal').classList.remove('hidden');
 
         // let url = "{{ route('transaksi.update', ':id') }}".replace(':id', id);

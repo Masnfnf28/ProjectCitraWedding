@@ -42,7 +42,7 @@
                                         @foreach ($client as $k)
                                             <option value="{{ $k->id }}"
                                                 {{ old('id_client') == $k->id ? 'selected' : '' }}>
-                                                {{ $k->namapl }}
+                                                {{ $k->namapl }} -  {{ $k->namapr }}
                                             </option>
                                         @endforeach
                                     </select>
