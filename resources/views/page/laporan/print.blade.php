@@ -209,12 +209,13 @@
                     <thead>
                         <tr>
                             <th class="border border-1 border-black">NO</th>
+                            <th class="border border-1 border-black">TANGGAL BOOKING</th>
                             <th class="border border-1 border-black">KODE INVOICE</th>
                             <th class="border border-1 border-black">CLIENT</th>
                             <th class="border border-1 border-black">KODE PAKET</th>
                             <th class="border border-1 border-black">DETAIL PAKET</th>
                             <th class="border border-1 border-black">LOKASI</th>
-                            <th class="border border-1 border-black">TANGGAL</th>
+                            <th class="border border-1 border-black">TANGGAL ACARA</th>
                             <th class="border border-1 border-black">STATUS</th>
                             <th class="border border-1 border-black">TOTAL HARGA</th>
                     </thead>
@@ -225,12 +226,13 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td class="border border-1 border-black tengah">{{ $no++ }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->tanggal }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->kode_invoice }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->client->namapl }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->paket->kode_paket }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->paket->jenis_paket }}, {{ $d->paket->makeup->type_makeup}}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->client->alamat }}</td>
-                                <td class="border border-1 border-black pl-2 tengah">{{ $d->tanggal }}</td>
+                                <td class="border border-1 border-black pl-2 tengah">{{ $d->tanggal_acara }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">{{ $d->status }}</td>
                                 <td class="border border-1 border-black pl-2 tengah">Rp {{ number_format($d->total_bayar,2)}}</td>
                                 
