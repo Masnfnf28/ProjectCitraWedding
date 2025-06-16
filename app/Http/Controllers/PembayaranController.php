@@ -18,6 +18,7 @@ class PembayaranController extends Controller
             ->with(['client', 'album', 'makeup', 'catering'])
             ->latest()
             ->paginate(10);
+        
 
         return view('page.pembayaran.index', [
             'transaksis' => $transaksis,

@@ -18,6 +18,8 @@ class DashboardController extends Controller
     {
         $totalBooking = Transaksi::count();
 
+        $totalPembayaran = Transaksi::sum('total_bayar');
+
         $totalClient = Client::distinct('id')->count('id');
 
         $daftarTanggalAcara = Transaksi::orderBy('tanggal_acara', 'asc')->get();
@@ -53,7 +55,8 @@ class DashboardController extends Controller
             'acaraBulanIni',
             'daysInMonth',
             'startDay',
-            'daftarAcara' // tambahkan variabel ini
+            'daftarAcara',
+            'totalPembayaran' // tambahkan variabel ini
         ));
     }
 

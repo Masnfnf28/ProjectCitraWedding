@@ -42,7 +42,8 @@
                                 </div>
                                 <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-500">Total Pendapatan</div>
-                                    <div class="text-2xl font-bold text-gray-900">Rp 50.000.000</div>
+                                    <div class="text-2xl font-bold text-gray-900">Rp
+                                        {{ number_format($totalPembayaran, 0, ',', '.') }}</div>
                                 </div>
                             </div>
                         </div>
