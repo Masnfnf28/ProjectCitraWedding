@@ -13,6 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap"
         rel="stylesheet">
 
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet @1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet @1.9.4/dist/leaflet.js"></script>
+
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -133,6 +138,20 @@
                     </blockquote>
                     <footer class="text-sm text-rose-600 font-semibold">— Sari & Doni</footer>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- MAPS --}}
+    <!-- Maps -->
+    <section class="py-10 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-playfair text-rose-700 mb-4">Lokasi Kami</h2>
+            <div class="w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1476.654041042439!2d108.24005011358507!3d-7.300726296525593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f5b6a744476ad%3A0xff638ff99a7ab194!2sCITRA%20WEDDING!5e0!3m2!1sid!2sid!4v1748365552758!5m2!1sid!2sid"
+                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>

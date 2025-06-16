@@ -68,28 +68,28 @@
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $transaksi->perPage() * ($transaksi->currentPage() - 1) + $key + 1 }}
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->kode_invoice }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->client->namapl }} - {{ $t->client->namapr}}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->paket->kode_paket }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->paket->jenis_paket }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->tanggal }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->tanggal_acara }}
                                         </td>
-                                        <td>
+                                        <td class="px-4 py-2">
                                             @if (Carbon\Carbon::parse($t->tanggal_acara)->isPast())
                                                 Selesai
                                             @else
@@ -97,14 +97,14 @@
                                             @endif
                                         </td>
 
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             {{ $t->pembayaran }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-4 py-2">
                                             Rp {{ number_format($t->total_bayar, 0, ',', '.') }}
                                         </td>
                                         @can('role=OWNER')
-                                            <td class="px-6 py-4">
+                                            <td class="px-4 py-2">
                                                 <button type="button" onclick="editSourceModal(this)"
                                                     data-id="{{ $t->id }}" data-modal-target="sourceModal"
                                                     data-tanggal_acara="{{ $t->tanggal_acara }}"
@@ -250,7 +250,7 @@
         status.classList.toggle('hidden');
     }
 
-    const transaksiDelete = async (id, ) => {
+    const transaksiDelete = async (id,client ) => {
         let tanya = confirm(`Apakah anda yakin untuk menghapus transaksi ${client}?`);
         if (tanya) {
             try {

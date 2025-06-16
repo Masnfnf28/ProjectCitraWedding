@@ -20,7 +20,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::paginate(5);
+        $transaksi = Transaksi::paginate(10);
         $paket = Paket::all();
         $user = User::all();
         $client = Client::all();
